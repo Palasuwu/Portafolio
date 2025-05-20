@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLSL Shader Example with Mouse Hover</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100vw; 
+      height: 100vh;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="webgl-canvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('webgl-canvas');
+    const gl = canvas.getContext('webgl');
+
+    if (!gl) {
+      alert('WebGL no disponible en tu navegador');
+      throw new Error('WebGL no disponible');
+    }
+
+    // Ajusta el tamaño del canvas a la ventana
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      gl.viewport(0, 0, canvas.width, canvas.height); // Adjust WebGL viewport
+    }
+
+    // Llamamos a la función para ajustar el tamaño inicialmente y también cuando el tamaño de la ventana cambie
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Variables para la posición del mouse
+    let mouseX = 0;
+    let mouseY = 0;
+    let hoverRadius = 0.1; // Radio de hover (normalizado)
+
+    // Track mouse movement
+    canvas.addEventListener('mousemove', (event) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseX = (event.clientX - rect.left) / rect.width;
+      mouseY = 1.0 - (event.clientY - rect.top) / rect.height; // Flip Y to match WebGL coordinates
+    });
+
+    // Vertex Shader
+    const vertexShaderSource = `
+      attribute vec2 a_position;
+      varying vec2 v_texCoord;
+      void main() {
+        v_texCoord = a_position * 0.5 + 0.5;
+        gl_Position = vec4(a_position, 0.0, 1.0);
+      }
+    `;
+
+    // Fragment Shader con efecto de hover mejorado
+    const fragmentShaderSource = `
+      precision highp float;
+      varying vec2 v_texCoord;
+      uniform float iTime;
+      uniform vec2 iResolution;
+      uniform vec2 iMouse; // Posición del mouse
+      uniform float hoverRadius;
+
+      #define SPIN_ROTATION 0.1
+      #define SPIN_SPEED 7.0
+      #define OFFSET vec2(0.0)
+      // Colores
+      #define COLOUR_1 vec4(0.6, 0.6, 0.8, 1.0) // Lighter blue
+      #define COLOUR_2 vec4(0.3, 0.2, 0.6, 1.0)
+      #define COLOUR_3 vec4(0.0, 0.0, 0.1, 1.0)
+      #define CONTRAST 3.5
+      #define LIGHTING 0.6
+      #define SPIN_AMOUNT 0.2
+      #define PIXEL_FILTER 3500.0
+      #define SPIN_EASE 0.35
+      #define PI 3.14159265359
+      #define IS_ROTATE true
+      #define PARTICLE_COUNT 80
+      #define PARTICLE_SIZE 0.001
+      #define PARTICLE_COLOR vec4(1.0, 1.0, 1.0, 1.0) // White particles
+
+      float rand(vec2 co) {
+          return fract(sin(dot(co, vec2(13.9898, 78.233))) * 43758.5453);
+      }
+
+      vec4 effect(vec2 screenSize, vec2 screen_coords, float particleLife) {
+          float pixel_size = length(screenSize.xy) / PIXEL_FILTER;
+          vec2 uv = (floor(screen_coords.xy*(1./pixel_size))*pixel_size - 0.5*screenSize.xy)/length(screenSize.xy) - OFFSET;
+          float uv_len = length(uv);
+
+          float speed = (SPIN_ROTATION * SPIN_EASE * 0.2);
+          if (IS_ROTATE) {
+             speed = iTime * speed;
+          }
+          speed += 302.2;
+          float new_pixel_angle = atan(uv.y, uv.x) + speed - SPIN_EASE * 20.0 * (1.0 * SPIN_AMOUNT * uv_len + (1.0 - 1.0 * SPIN_AMOUNT));
+          vec2 mid = (screenSize.xy / length(screenSize.xy)) / 2.0;
+          uv = (vec2((uv_len * cos(new_pixel_angle) + mid.x), (uv_len * sin(new_pixel_angle) + mid.y)) - mid);
+
+          uv *= 30.0;
+          speed = iTime * (SPIN_SPEED);
+          vec2 uv2 = vec2(uv.x + uv.y);
+
+          for (int i = 0; i < 5; i++) {
+              uv2 += sin(max(uv.x, uv.y)) + uv;
+              uv  += 0.5 * vec2(cos(5.1123314 + 0.353 * uv2.y + speed * 0.131121), sin(uv2.x - 0.113 * speed));
+              uv  -= 1.0 * cos(uv.x + uv.y) - 1.0 * sin(uv.x * 0.711 - uv.y);
+          }
+
+          float contrast_mod = (0.25 * CONTRAST + 0.5 * SPIN_AMOUNT + 1.2);
+          float paint_res = min(2.0, max(0.0, length(uv) * (0.035) * contrast_mod));
+          float c1p = max(0.0, 1.0 - contrast_mod * abs(1.0 - paint_res));
+          float c2p = max(0.0, 1.0 - contrast_mod * abs(paint_res));
+          float c3p = 1.0 - min(1.0, c1p + c2p);
+          float light = (LIGHTING - 0.2) * max(c1p * 5.0 - 4.0, 0.0) + LIGHTING * max(c2p * 5.0 - 4.0, 0.0);
+          vec4 background = (0.3 / CONTRAST) * COLOUR_1 + (1.0 - 0.3 / CONTRAST) * (COLOUR_1 * c1p + COLOUR_2 * c2p + vec4(c3p * COLOUR_3.rgb, c3p * COLOUR_1.a)) + light;
+
+          // Hover effect logic
+          float dist = length(screen_coords / screenSize - iMouse);
+          float hoverStrength = 1.0 - smoothstep(hoverRadius, hoverRadius + 0.05, dist);
+          
+          // Blend the hover effect with the background
+          background = mix(background, COLOUR_2, hoverStrength);
+
+          for (int i = 0; i < PARTICLE_COUNT; i++) {
+              vec2 pos = vec2(rand(vec2(float(i), 0.0)), rand(vec2(0.0, float(i))));
+              pos = mod(pos + vec2(iTime * 0.05 * rand(vec2(float(i) * 2.0, 0.0))), 1.0);
+
+              float lifeFactor = mod(iTime, particleLife) / particleLife;
+              if (length(screen_coords / screenSize - pos) < PARTICLE_SIZE * lifeFactor) {
+                  background += PARTICLE_COLOR * (0.5 + 0.5 * sin(iTime * 2.0));
+              }
+          }
+
+          return background;
+      }
+
+      void main() {
+          vec4 color = effect(iResolution.xy, v_texCoord * iResolution.xy, 5.0);
+          gl_FragColor = color;
+      }
+    `;
+
+    // Función de compilación de shaders
+    function compileShader(type, source) {
+      const shader = gl.createShader(type);
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        console.error('Error compilando el shader:', gl.getShaderInfoLog(shader));
+        return null;
+      }
+      return shader;
+    }
+
+    const vertexShader = compileShader(gl.VERTEX_SHADER, vertexShaderSource);
+    const fragmentShader = compileShader(gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+    // Creación del programa
+    const program = gl.createProgram();
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
+
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.error('Error al vincular el programa:', gl.getProgramInfoLog(program));
+    }
+
+    gl.useProgram(program);
+
+    // Ubicación del atributo
+    const positionLocation = gl.getAttribLocation(program, 'a_position');
+    const positionBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+      -1.0, -1.0,
+       1.0, -1.0,
+      -1.0,  1.0,
+      -1.0,  1.0,
+       1.0, -1.0,
+       1.0,  1.0,
+    ]), gl.STATIC_DRAW);
+
+    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(positionLocation);
+
+    // Uniforms
+    const iTimeLocation = gl.getUniformLocation(program, 'iTime');
+    const iResolutionLocation = gl.getUniformLocation(program, 'iResolution');
+    const iMouseLocation = gl.getUniformLocation(program, 'iMouse');
+    const hoverRadiusLocation = gl.getUniformLocation(program, 'hoverRadius');
+
+    // Bucle de renderizado
+    function render(time) {
+      gl.clear(gl.COLOR_BUFFER_BIT);
+
+      // Actualizar los uniforms
+      gl.uniform1f(iTimeLocation, time * 0.001);
+      gl.uniform2f(iResolutionLocation, canvas.width, canvas.height);
+      gl.uniform2f(iMouseLocation, mouseX, mouseY);
+      gl.uniform1f(hoverRadiusLocation, hoverRadius);
+
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+      requestAnimationFrame(render);
+    }
+
+    render();
+  </script>
+</body>
+</html>
