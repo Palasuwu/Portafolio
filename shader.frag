@@ -21,7 +21,7 @@ uniform float hoverRadius;
 #define HOVER_LIGHTING 0.9
 
 // === ⚙️ Constantes generales ===
-#define SPIN_ROTATION 0.1
+#define SPIN_ROTATION 0.55
 #define OFFSET vec2(0.0)
 #define CONTRAST 3.5
 #define SPIN_AMOUNT 0.2
@@ -29,7 +29,7 @@ uniform float hoverRadius;
 #define SPIN_EASE 0.35
 #define IS_ROTATE true
 #define PARTICLE_COUNT 80
-#define PARTICLE_SIZE 0.001
+#define PARTICLE_SIZE 0.0001
 #define PARTICLE_COLOR vec4(1.0, 1.0, 1.0, 1.0)
 
 // === Función para números aleatorios ===

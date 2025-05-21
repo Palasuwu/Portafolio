@@ -2,14 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>GLSL Hover Shader</title>
-  <style>
-    body { margin: 0; overflow: hidden; }
-    canvas { width: 100vw; height: 100vh; display: block; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GLSL Shader Scroll Parallax</title>
+  <link rel="stylesheet" href="stylesheet.css" />
 </head>
 <body>
+
+  <!-- 🖤 Marco que se reduce con animación -->
+  <div class="top-border"></div>
+
+  <!-- 🌌 Canvas que se extiende hasta el infinito -->
   <canvas id="webgl-canvas"></canvas>
+
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- 📜 Contenido para hacer scroll -->
+  <div class="content">
+    
+    <div style="height: 3000px;"></div>
+  </div>
+
   <script type="module" src="main.js"></script>
 </body>
 </html>

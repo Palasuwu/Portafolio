@@ -8,31 +8,44 @@ if (!gl) {
 
 function resizeCanvas() {
   canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.height = document.documentElement.scrollHeight; // canvas infinito
   gl.viewport(0, 0, canvas.width, canvas.height);
 }
+
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
+// 🖱 Mouse tracking corregido (sin interferencia del borde)
 let mouseX = 0, mouseY = 0;
-canvas.addEventListener('mousemove', e => {
+window.addEventListener('mousemove', e => {
   const rect = canvas.getBoundingClientRect();
   mouseX = (e.clientX - rect.left) / rect.width;
   mouseY = 1.0 - (e.clientY - rect.top) / rect.height;
 });
 
-// Cargar shaders externos
+// 🖤 Animación al hacer scroll
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const threshold = 100;
+  const border = document.querySelector('.top-border');
+
+  if (scrollY > threshold && !border.classList.contains('shrink')) {
+    border.classList.add('shrink');
+  }
+});
+
+// 📦 Shader setup
 async function loadShaderSource(url) {
   const res = await fetch(url);
   return res.text();
 }
 
 async function init() {
-  const vertexSrc = await loadShaderSource('shader.vert');
-  const fragmentSrc = await loadShaderSource('shader.frag');
+  const vsSrc = await loadShaderSource('shader.vert');
+  const fsSrc = await loadShaderSource('shader.frag');
 
-  const vs = compileShader(gl.VERTEX_SHADER, vertexSrc);
-  const fs = compileShader(gl.FRAGMENT_SHADER, fragmentSrc);
+  const vs = compileShader(gl.VERTEX_SHADER, vsSrc);
+  const fs = compileShader(gl.FRAGMENT_SHADER, fsSrc);
 
   const program = gl.createProgram();
   gl.attachShader(program, vs);
@@ -55,12 +68,12 @@ async function init() {
   const mouseLoc = gl.getUniformLocation(program, 'iMouse');
   const radiusLoc = gl.getUniformLocation(program, 'hoverRadius');
 
-  function render(t) {
+  function render(time) {
     gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.uniform1f(timeLoc, t * 0.001);
+    gl.uniform1f(timeLoc, time * 0.001);
     gl.uniform2f(resLoc, canvas.width, canvas.height);
     gl.uniform2f(mouseLoc, mouseX, mouseY);
-    gl.uniform1f(radiusLoc, 0.15);
+    gl.uniform1f(radiusLoc, 0.15); // hover radius
     gl.drawArrays(gl.TRIANGLES, 0, 6);
     requestAnimationFrame(render);
   }
