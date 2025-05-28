@@ -1,4 +1,4 @@
-const canvas = document.getElementById('webgl-canvas');
+const canvas = document.getElementById('webgl-canvas2');
 const gl = canvas.getContext('webgl');
 
 if (!gl) {
@@ -31,8 +31,8 @@ async function loadShaderSource(url) {
 }
 
 async function init() {
-  const vsSrc = await loadShaderSource('shader.vert');
-  const fsSrc = await loadShaderSource('shader.frag');
+  const vsSrc = await loadShaderSource('shader1.vert');
+  const fsSrc = await loadShaderSource('shader1.frag');
 
   const vs = compileShader(gl.VERTEX_SHADER, vsSrc);
   const fs = compileShader(gl.FRAGMENT_SHADER, fsSrc);

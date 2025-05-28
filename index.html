@@ -8,20 +8,23 @@
 </head>
 <body>
 
-  <!-- 🖤 Marco que se reduce con animación -->
-  <div class="top-border"></div>
-
-  <!-- 🌌 Canvas que se extiende hasta el infinito -->
-  <canvas id="webgl-canvas"></canvas>
-
-  <canvas id="webgl-canvas"></canvas>
-
-  <!-- 📜 Contenido para hacer scroll -->
-  <div class="content">
-    
-    <div style="height: 3000px;"></div>
+  
+  <!-- 🌌 Shader Containers -->
+  <div class="shader-container">
+    <canvas id="webgl-canvas"></canvas>
   </div>
 
+  <div class="shader-container">
+    <canvas id="webgl-canvas1"></canvas>
+  </div>
+  <div class="shader-container">
+    <canvas id="webgl-canvas2"></canvas>
+  </div>
+
+  
+
+  <script type="module" src="main1.js"></script>
+  <script type="module" src="main2.js"></script>
   <script type="module" src="main.js"></script>
 </body>
 </html>
