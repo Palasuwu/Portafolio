@@ -12,21 +12,58 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
-    pointer-events: none; /* Allow interactions to pass through */
+    z-index: 0; /* Allow interactions to pass through */
 }
 
-canvas {
-    position: absolute;
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
-    pointer-events: none; /* Ensure the canvas does not block interactions */
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    z-index: 2;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.content {
-    position: relative;
-    z-index: 2; /* Ensure it is above the shader */
+.top-bar button {
+    background: #007BFF;
     color: white;
-    padding: 3rem;
-    height: 3000px; /* Ensure enough height for scrolling */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
+
+.top-bar button:hover {
+    background: #0056b3;
+}
+
+.controls {
+    position: absolute;
+    display: none; /* Hidden by default */
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+    font-family: Arial, sans-serif;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgb(255, 255, 255);
+    z-index: 1;
+}
+
+.shader-container:hover {
+    cursor: crosshair;
+}
+
+.controls input[type="range"] {
+    width: 100%;
+}
+

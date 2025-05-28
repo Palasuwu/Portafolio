@@ -2,20 +2,19 @@ const canvas = document.getElementById('webgl-canvas');
 const gl = canvas.getContext('webgl');
 
 if (!gl) {
-  alert('WebGL no disponible');
-  throw new Error('WebGL no disponible');
+  alert('WebGL not available');
+  throw new Error('WebGL not available');
 }
 
 function resizeCanvas() {
   canvas.width = window.innerWidth;
-  canvas.height = document.documentElement.scrollHeight; // canvas infinito
+  canvas.height = window.innerHeight;
   gl.viewport(0, 0, canvas.width, canvas.height);
 }
 
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
-// 🖱 Mouse tracking corregido (sin interferencia del borde)
 let mouseX = 0, mouseY = 0;
 window.addEventListener('mousemove', e => {
   const rect = canvas.getBoundingClientRect();
@@ -23,8 +22,6 @@ window.addEventListener('mousemove', e => {
   mouseY = 1.0 - (e.clientY - rect.top) / rect.height;
 });
 
-
-// 📦 Shader setup
 async function loadShaderSource(url) {
   const res = await fetch(url);
   return res.text();
@@ -57,13 +54,50 @@ async function init() {
   const resLoc = gl.getUniformLocation(program, 'iResolution');
   const mouseLoc = gl.getUniformLocation(program, 'iMouse');
   const radiusLoc = gl.getUniformLocation(program, 'hoverRadius');
+  const colour1Loc = gl.getUniformLocation(program, 'COLOUR_1');
+  const spinSpeedLoc = gl.getUniformLocation(program, 'SPIN_SPEED');
+  const lightingLoc = gl.getUniformLocation(program, 'LIGHTING');
+
+  // Initial values for shader constants
+  let hoverRadius = 0.0;
+  let colour1 = [0.6, 0.6, 0.8, 1.0];
+  let spinSpeed = 4.0;
+  let lighting = 1.0;
+
+  // Update shader constants from sliders
+  document.getElementById('hoverRadius').addEventListener('input', (e) => {
+    hoverRadius = parseFloat(e.target.value);
+  });
+
+  document.getElementById('colour1R').addEventListener('input', (e) => {
+    colour1[0] = parseFloat(e.target.value);
+  });
+
+  document.getElementById('colour1G').addEventListener('input', (e) => {
+    colour1[1] = parseFloat(e.target.value);
+  });
+
+  document.getElementById('colour1B').addEventListener('input', (e) => {
+    colour1[2] = parseFloat(e.target.value);
+  });
+
+  document.getElementById('spinSpeed').addEventListener('input', (e) => {
+    spinSpeed = parseFloat(e.target.value);
+  });
+
+  document.getElementById('lighting').addEventListener('input', (e) => {
+    lighting = parseFloat(e.target.value);
+  });
 
   function render(time) {
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.uniform1f(timeLoc, time * 0.001);
     gl.uniform2f(resLoc, canvas.width, canvas.height);
     gl.uniform2f(mouseLoc, mouseX, mouseY);
-    gl.uniform1f(radiusLoc, 0.15); // hover radius
+    gl.uniform1f(radiusLoc, hoverRadius); // Update hover radius
+    gl.uniform4fv(colour1Loc, colour1); // Update base color 1
+    gl.uniform1f(spinSpeedLoc, spinSpeed); // Update spin speed
+    gl.uniform1f(lightingLoc, lighting); // Update lighting
     gl.drawArrays(gl.TRIANGLES, 0, 6);
     requestAnimationFrame(render);
   }
@@ -83,6 +117,24 @@ function compileShader(type, source) {
 }
 
 init();
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleButton = document.getElementById('toggle-controls');
+  const controls = document.querySelector('.controls');
+
+  let controlsVisible = false;
+
+  toggleButton.addEventListener('click', () => {
+    controlsVisible = !controlsVisible;
+    if (controlsVisible) {
+      controls.style.display = 'block';
+      toggleButton.textContent = 'Hide Controls';
+    } else {
+      controls.style.display = 'none';
+      toggleButton.textContent = 'Show Controls';
+    }
+  });
+});
 
 /* CSS styles */
 const style = document.createElement('style');

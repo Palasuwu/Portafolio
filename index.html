@@ -8,10 +8,33 @@
 </head>
 <body>
 
-  
+  <div class="top-bar">
+    <button id="toggle-controls">Show Controls</button>
+  </div>
+
   <!-- 🌌 Shader Containers -->
   <div class="shader-container">
     <canvas id="webgl-canvas"></canvas>
+  </div>
+
+  <div class="controls">
+    <!-- Sliders for Base Shader Constants -->
+    <label for="colour1R">Base Color 1 (R):</label>
+    <input type="range" id="colour1R" min="0.0" max="1.0" step="0.01" value="0.6">
+    <label for="colour1G">Base Color 1 (G):</label>
+    <input type="range" id="colour1G" min="0.0" max="1.0" step="0.01" value="0.6">
+    <label for="colour1B">Base Color 1 (B):</label>
+    <input type="range" id="colour1B" min="0.0" max="1.0" step="0.01" value="0.8">
+
+    <label for="spinSpeed">Spin Speed:</label>
+    <input type="range" id="spinSpeed" min="0.0" max="10.0" step="0.1" value="4.0">
+
+    <label for="lighting">Lighting:</label>
+    <input type="range" id="lighting" min="0.0" max="2.0" step="0.1" value="1.0">
+
+    <!-- Existing Hover Sliders -->
+    <label for="hoverRadius">Hover Radius:</label>
+    <input type="range" id="hoverRadius" min="0.0" max="1.0" step="0.01" value="0.15">
   </div>
 
   <div class="shader-container">
@@ -20,8 +43,6 @@
   <div class="shader-container">
     <canvas id="webgl-canvas2"></canvas>
   </div>
-
-  
 
   <script type="module" src="main1.js"></script>
   <script type="module" src="main2.js"></script>

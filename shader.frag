@@ -6,12 +6,12 @@ uniform vec2 iResolution;
 uniform vec2 iMouse;
 uniform float hoverRadius;
 
-// === 🎯 Constantes shader PRINCIPAL ===
-#define COLOUR_1 vec4(0.6, 0.6, 0.8, 1.0)
-#define COLOUR_2 vec4(0.3, 0.2, 0.6, 1.0)
-#define COLOUR_3 vec4(0.0, 0.0, 0.1, 1.0)
-#define SPIN_SPEED 7.0
-#define LIGHTING 0.6
+// === 🎯 Constantes shader PRINCIPAL (now uniforms) ===
+uniform vec4 COLOUR_1;
+uniform vec4 COLOUR_2;
+uniform vec4 COLOUR_3;
+uniform float SPIN_SPEED;
+uniform float LIGHTING;
 
 // === 🌀 Constantes shader HOVER ===
 #define HOVER_COLOUR_1 vec4(0.9, 0.4, 0.6, 1.0)
@@ -21,7 +21,7 @@ uniform float hoverRadius;
 #define HOVER_LIGHTING 0.9
 
 // === ⚙️ Constantes generales ===
-#define SPIN_ROTATION 0.55
+#define SPIN_ROTATION 0.60
 #define OFFSET vec2(0.0)
 #define CONTRAST 3.5
 #define SPIN_AMOUNT 0.2
