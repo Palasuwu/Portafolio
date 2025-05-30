@@ -3,7 +3,8 @@ const text1_options = [
   "2",
   "3",
   "4",
-  "5"
+  "5",
+  "6"
 ];
 const text2_options = [
   "1-1",

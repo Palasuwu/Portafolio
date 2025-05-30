@@ -62,10 +62,10 @@ async function init() {
 
   // Initial values for shader constants
   let hoverRadius = 0.0;
-  let colour1 = [0.6, 0.6, 0.8, 1.0];
+  let colour1 = [0.0, 0.6, 0.8, 1.0];
   let colour2 = [0.2, 0.8, 0.4, 1.0];
   let colour3 = [0.8, 0.4, 0.2, 1.0];
-  let spinSpeed = 4.0;
+  let spinSpeed = 1.0;
   let lighting = 1.0;
 
   // Update shader constants from sliders
@@ -110,41 +110,52 @@ async function init() {
 
   // Function to update shader uniforms based on the current card index
   function updateShaderUniforms(index) {
+    // --------------- Initial Shader Values ---------------
+    // These values correspond to the initial state of the shader (before any button interaction).
     switch (index) {
-      case 0:
-        colour1 = [0.6, 0.2, 0.8, 1.0];
-        colour2 = [0.2, 0.8, 0.4, 1.0];
-        colour3 = [0.8, 0.4, 0.2, 1.0];
-        spinSpeed = 10.0;
-        lighting = 1.0;
+      case 0: // Card 1: "Quien soy ?"
+      let colour1 = [0.0, 0.6, 0.8, 1.0];
+      let colour2 = [0.2, 0.8, 0.4, 1.0];
+      let colour3 = [0.8, 0.4, 0.2, 1.0];
+      let spinSpeed = 1.0;
+      let lighting = 1.0;
         break;
+       
+
+      // --------------- Card 2: "Card 2 Title" ---------------
       case 1:
-        colour1 = [0.4, 0.6, 0.8, 1.0];
-        colour2 = [0.8, 0.8, 0.2, 1.0];
-        colour3 = [0.2, 0.4, 0.6, 1.0];
-        spinSpeed = 15.0;
-        lighting = 0.8;
+        colour1 = [0.4, 0.6, 0.8, 1.0]; // Blue tone
+        colour2 = [0.8, 0.8, 0.2, 1.0]; // Yellow tone
+        colour3 = [0.2, 0.4, 0.6, 1.0]; // Dark blue tone
+        spinSpeed = 2.0; // Faster spin speed
+        lighting = 0.8; // Slightly dimmer lighting
         break;
+
+      // --------------- Card 3: "Card 3 Title" ---------------
       case 2:
-        colour1 = [0.8, 0.2, 0.4, 1.0];
-        colour2 = [0.4, 0.8, 0.6, 1.0];
-        colour3 = [0.6, 0.2, 0.8, 1.0];
-        spinSpeed = 20.0;
-        lighting = 1.2;
+        colour1 = [0.8, 0.2, 0.4, 1.0]; // Red tone
+        colour2 = [0.4, 0.8, 0.6, 1.0]; // Teal tone
+        colour3 = [0.6, 0.2, 0.8, 1.0]; // Purple tone
+        spinSpeed = 3.0; // Moderate spin speed
+        lighting = 1.2; // Slightly brighter lighting
         break;
+
+      // --------------- Card 4: "Card 4 Title" ---------------
       case 3:
-        colour1 = [0.2, 0.4, 0.6, 1.0];
-        colour2 = [0.6, 0.8, 0.2, 1.0];
-        colour3 = [0.8, 0.6, 0.4, 1.0];
-        spinSpeed = 25.0;
-        lighting = 1.5;
+        colour1 = [0.2, 0.4, 0.6, 1.0]; // Cyan tone
+        colour2 = [0.6, 0.8, 0.2, 1.0]; // Lime tone
+        colour3 = [0.8, 0.6, 0.4, 1.0]; // Brown tone
+        spinSpeed = 4.0; // Moderate spin speed
+        lighting = 1.5; // Bright lighting
         break;
+
+      // --------------- Card 5: "Card 5 Title" ---------------
       case 4:
-        colour1 = [0.6, 0.8, 0.2, 1.0];
-        colour2 = [0.2, 0.6, 0.8, 1.0];
-        colour3 = [0.4, 0.2, 0.6, 1.0];
-        spinSpeed = 30.0;
-        lighting = 1.8;
+        colour1 = [0.6, 0.8, 0.2, 1.0]; // Lime tone
+        colour2 = [0.2, 0.6, 0.8, 1.0]; // Cyan tone
+        colour3 = [0.4, 0.2, 0.6, 1.0]; // Purple tone
+        spinSpeed = 5.0; // Moderate spin speed
+        lighting = 1.8; // Bright lighting
         break;
     }
   }
@@ -172,6 +183,7 @@ async function init() {
     transitionStartTime = performance.now();
 
     // Save the current values as the starting point
+    // --------------- Starting Values ---------------
     startValues = {
       colour1: [...colour1],
       colour2: [...colour2],
@@ -182,49 +194,58 @@ async function init() {
 
     // Set the target values based on the new card index
     switch (index) {
+      // --------------- Card 1: "Quien soy ?" ---------------
       case 0:
-        endValues = {
-          colour1: [0.6, 0.2, 0.8, 1.0],
-          colour2: [0.2, 0.8, 0.4, 1.0],
-          colour3: [0.8, 0.4, 0.2, 1.0],
-          spinSpeed: 10.0,
-          lighting: 1.0,
+        endValues = { 
+          colour1 : [0.0, 0.6, 0.8, 1.0],
+          colour2 : [0.2, 0.8, 0.4, 1.0],
+          colour3 : [0.8, 0.4, 0.2, 1.0],
+          spinSpeed :1.0,
+          lighting : 1.0
         };
         break;
+
+      // --------------- Card 2: "Card 2 Title" ---------------
       case 1:
         endValues = {
-          colour1: [0.4, 0.6, 0.8, 1.0],
-          colour2: [0.8, 0.8, 0.2, 1.0],
-          colour3: [0.2, 0.4, 0.6, 1.0],
-          spinSpeed: 15.0,
-          lighting: 0.8,
+          colour1: [0.4, 0.6, 0.8, 1.0], // Blue tone
+          colour2: [0.8, 0.8, 0.2, 1.0], // Yellow tone
+          colour3: [0.2, 0.4, 0.6, 1.0], // Dark blue tone
+          spinSpeed: 1.0, // Faster spin speed
+          lighting: 0.8, // Slightly dimmer lighting
         };
         break;
+
+      // --------------- Card 3: "Card 3 Title" ---------------
       case 2:
         endValues = {
-          colour1: [0.8, 0.2, 0.4, 1.0],
-          colour2: [0.4, 0.8, 0.6, 1.0],
-          colour3: [0.6, 0.2, 0.8, 1.0],
-          spinSpeed: 20.0,
-          lighting: 1.2,
+          colour1: [0.8, 0.2, 0.4, 1.0], // Red tone
+          colour2: [0.4, 0.8, 0.6, 1.0], // Teal tone
+          colour3: [0.6, 0.2, 0.8, 1.0], // Purple tone
+          spinSpeed: 3.0, // Slow spin speed
+          lighting: 1.0, // Slightly brighter lighting
         };
         break;
+
+      // --------------- Card 4: "Card 4 Title" ---------------
       case 3:
         endValues = {
-          colour1: [0.2, 0.4, 0.6, 1.0],
-          colour2: [0.6, 0.8, 0.2, 1.0],
-          colour3: [0.8, 0.6, 0.4, 1.0],
-          spinSpeed: 25.0,
-          lighting: 1.5,
+          colour1: [0.0, 0.4, 0.6, 1.0], // Cyan tone
+          colour2: [0.6, 0.8, 0.2, 1.0], // Lime tone
+          colour3: [0.8, 0.6, 0.4, 1.0], // Brown tone
+          spinSpeed: 4.0, // Moderate spin speed
+          lighting: 0.5, // Dim lighting
         };
         break;
+
+      // --------------- Card 5: "Card 5 Title" ---------------
       case 4:
         endValues = {
-          colour1: [0.6, 0.8, 0.2, 1.0],
-          colour2: [0.2, 0.6, 0.8, 1.0],
-          colour3: [0.4, 0.2, 0.6, 1.0],
-          spinSpeed: 30.0,
-          lighting: 1.8,
+          colour1: [0.6, 0.8, 0.2, 1.0], // Lime tone
+          colour2: [0.2, 0.6, 0.8, 1.0], // Cyan tone
+          colour3: [0.4, 0.2, 0.6, 1.0], // Purple tone
+          spinSpeed: 5.0, // Moderate spin speed
+          lighting: 1.0, // Normal lighting
         };
         break;
     }
@@ -302,39 +323,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
-/* CSS styles */
-const style = document.createElement('style');
-style.textContent = `
-html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    background: black;
-    height: 100%; /* Ensure the body spans the full height */
-}
-
-.shader-container {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Set height to the viewport height */
-    z-index: 0;
-    pointer-events: none; /* Allow interactions to pass through */
-}
-
-canvas {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Ensure the canvas does not block interactions */
-}
-
-.content {
-    position: relative;
-    z-index: 2; /* Ensure it is above the shader */
-    color: white;
-    padding: 3rem;
-    height: 100vh; /* Set height to the viewport height */
-}
-`;
-document.head.appendChild(style);
