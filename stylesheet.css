@@ -1,18 +1,26 @@
 html, body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    overflow: hidden; /* Prevent scrolling */
     background: black;
     height: 100%; /* Ensure the body spans the full height */
 }
 
+/* Ensure the shader container spans the full screen */
 .shader-container {
-    position: fixed;
+    position: fixed; /* Covers the entire screen */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; /* Allow interactions to pass through */
+    z-index: 0; /* Keep it behind other elements */
+    overflow: hidden; /* Prevent overflow */
+}
+
+canvas {
+    display: block; /* Remove inline spacing */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
 }
 
 .top-bar {
@@ -20,7 +28,7 @@ html, body {
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.626);
     color: white;
     padding: 10px;
     text-align: center;
@@ -30,7 +38,7 @@ html, body {
 }
 
 .top-bar button {
-    background: #007BFF;
+    background: #007bff0a;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -56,7 +64,7 @@ html, body {
     font-family: Arial, sans-serif;
     max-width: 400px;
     box-shadow: 0 4px 8px rgb(255, 255, 255);
-    z-index: 1;
+    z-index: 102;
 }
 
 .shader-container:hover {
@@ -67,3 +75,171 @@ html, body {
     width: 100%;
 }
 
+/* Center the carousel in the middle of the shader */
+#carousel-wrapper {
+    position: absolute; /* Position it on top of the shader */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for centering */
+    z-index: 5; /* Ensure it appears above the shader */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+}
+
+#menu {
+    height: 380px;
+    width: 720px;
+    overflow: hidden;
+    font-weight: 700;
+    line-height: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    transition: all 0.8s ease-in-out;
+
+    /* Glass-like background */
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Blur effect for the glass look */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Optional border for definition */
+}
+
+#current-option {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    transform: translate(-25%, 0%);
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#current-option-text1 {
+    font-size: 1.7rem;
+    line-height: 3rem;
+    width: 220px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 10px; /* Add spacing below text1 */
+    cursor: pointer; /* Change cursor to pointer to indicate interactivity */
+}
+
+#current-option-text1:hover {
+    text-decoration: underline; /* Optional: Add underline on hover */
+}
+#current-option-text3 {
+    font-size: 0.8rem;
+    width: 220px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 10px; /* Add spacing below text3 */
+    opacity: 0; /* Start with hidden state */
+    transform: translateY(-10px); /* Slightly move up when hidden */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for opacity and position */
+}
+#current-option-text2 {
+    font-size: 0.8rem;
+    width: 220px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+#current-option-text3.expanded {
+    display: flex; /* Ensure it is visible */
+    opacity: 4; /* Fade in */
+    transform: translateY(0); /* Move to original position */
+}
+
+#current-option-text3.hidden {
+    display: flex; /* Keep it in the layout but invisible */
+    opacity: 0; /* Fade out */
+    transform: translateY(-10px); /* Move slightly up */
+}
+#previous-option,
+#next-option {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    display: block;
+    cursor: pointer;
+    background-size: cover;
+    position: absolute;
+}
+
+#previous-option {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpolygon points='225.813,48.907 128,146.72 30.187,48.907 0,79.093 128,207.093 256,79.093' fill='%23333'/%3E%3C/svg%3E");
+    transform: translate(310px, 50px);
+}
+
+#next-option {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpolygon points='225.813,48.907 128,146.72 30.187,48.907 0,79.093 128,207.093 256,79.093' fill='%23333'/%3E%3C/svg%3E");
+    transform: translate(310px, -50px) rotate(180deg);
+}
+#previous-option:hover,
+#next-option:hover {
+    box-shadow: 0 0 4px rgba(80, 246, 255, 0.586); /* Subtle shadow on hover */
+}
+
+#image {
+    height: 240px;
+    width: 240px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 101;
+    position: absolute;
+    transform: translate(140px, 0);
+}
+
+#image:hover {
+    animation: resize 0.8s ease-in-out forwards; /* Increased duration for smoother animation */
+    box-shadow: 0 0 10px rgba(80, 246, 255, 0.586); /* Subtle shadow on hover */
+}
+
+/* Define the animation with 8 keyframes */
+@keyframes resize {
+    0% {
+        transform: translate(140px, 0) scale(0.9);
+    }
+    12.5% {
+        transform: translate(140px, 0) scale(0.85);
+    }
+    25% {
+        transform: translate(140px, 0) scale(0.9);
+    }
+    37.5% {
+        transform: translate(140px, 0) scale(0.95);
+    }
+    50% {
+        transform: translate(140px, 0) scale(1.0);
+    }
+    62.5% {
+        transform: translate(140px, 0) scale(1.05);
+    }
+    75% {
+        transform: translate(140px, 0) scale(1.07);
+    }
+    100% {
+        transform: translate(140px, 0) scale(1.0);
+    }
+}
