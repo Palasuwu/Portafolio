@@ -55,12 +55,16 @@ async function init() {
   const mouseLoc = gl.getUniformLocation(program, 'iMouse');
   const radiusLoc = gl.getUniformLocation(program, 'hoverRadius');
   const colour1Loc = gl.getUniformLocation(program, 'COLOUR_1');
+  const colour2Loc = gl.getUniformLocation(program, 'COLOUR_2');
+  const colour3Loc = gl.getUniformLocation(program, 'COLOUR_3');
   const spinSpeedLoc = gl.getUniformLocation(program, 'SPIN_SPEED');
   const lightingLoc = gl.getUniformLocation(program, 'LIGHTING');
 
   // Initial values for shader constants
   let hoverRadius = 0.0;
   let colour1 = [0.6, 0.6, 0.8, 1.0];
+  let colour2 = [0.2, 0.8, 0.4, 1.0];
+  let colour3 = [0.8, 0.4, 0.2, 1.0];
   let spinSpeed = 4.0;
   let lighting = 1.0;
 
@@ -89,13 +93,176 @@ async function init() {
     lighting = parseFloat(e.target.value);
   });
 
+  // Event listeners for "Next" and "Previous" buttons
+  const optionNext = document.getElementById('next-option');
+  const optionPrevious = document.getElementById('previous-option');
+  let currentIndex = 0;
+
+  optionNext.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % 5; // Assuming 5 cards
+    startTransition(currentIndex);
+  });
+
+  optionPrevious.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + 5) % 5; // Assuming 5 cards
+    startTransition(currentIndex);
+  });
+
+  // Function to update shader uniforms based on the current card index
+  function updateShaderUniforms(index) {
+    switch (index) {
+      case 0:
+        colour1 = [0.6, 0.2, 0.8, 1.0];
+        colour2 = [0.2, 0.8, 0.4, 1.0];
+        colour3 = [0.8, 0.4, 0.2, 1.0];
+        spinSpeed = 10.0;
+        lighting = 1.0;
+        break;
+      case 1:
+        colour1 = [0.4, 0.6, 0.8, 1.0];
+        colour2 = [0.8, 0.8, 0.2, 1.0];
+        colour3 = [0.2, 0.4, 0.6, 1.0];
+        spinSpeed = 15.0;
+        lighting = 0.8;
+        break;
+      case 2:
+        colour1 = [0.8, 0.2, 0.4, 1.0];
+        colour2 = [0.4, 0.8, 0.6, 1.0];
+        colour3 = [0.6, 0.2, 0.8, 1.0];
+        spinSpeed = 20.0;
+        lighting = 1.2;
+        break;
+      case 3:
+        colour1 = [0.2, 0.4, 0.6, 1.0];
+        colour2 = [0.6, 0.8, 0.2, 1.0];
+        colour3 = [0.8, 0.6, 0.4, 1.0];
+        spinSpeed = 25.0;
+        lighting = 1.5;
+        break;
+      case 4:
+        colour1 = [0.6, 0.8, 0.2, 1.0];
+        colour2 = [0.2, 0.6, 0.8, 1.0];
+        colour3 = [0.4, 0.2, 0.6, 1.0];
+        spinSpeed = 30.0;
+        lighting = 1.8;
+        break;
+    }
+  }
+
+  function easeInOut(t) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  }
+
+  function lerp(start, end, t) {
+    return start + (end - start) * t;
+  }
+
+  function interpolateArray(startArray, endArray, t) {
+    return startArray.map((start, index) => lerp(start, endArray[index], t));
+  }
+
+  let transitionStartTime = null;
+  let transitionDuration = 3500; // Increased duration for smoother transitions
+  let transitioning = false;
+  let startValues = {};
+  let endValues = {};
+
+  function startTransition(index) {
+    transitioning = true;
+    transitionStartTime = performance.now();
+
+    // Save the current values as the starting point
+    startValues = {
+      colour1: [...colour1],
+      colour2: [...colour2],
+      colour3: [...colour3],
+      spinSpeed: spinSpeed,
+      lighting: lighting,
+    };
+
+    // Set the target values based on the new card index
+    switch (index) {
+      case 0:
+        endValues = {
+          colour1: [0.6, 0.2, 0.8, 1.0],
+          colour2: [0.2, 0.8, 0.4, 1.0],
+          colour3: [0.8, 0.4, 0.2, 1.0],
+          spinSpeed: 10.0,
+          lighting: 1.0,
+        };
+        break;
+      case 1:
+        endValues = {
+          colour1: [0.4, 0.6, 0.8, 1.0],
+          colour2: [0.8, 0.8, 0.2, 1.0],
+          colour3: [0.2, 0.4, 0.6, 1.0],
+          spinSpeed: 15.0,
+          lighting: 0.8,
+        };
+        break;
+      case 2:
+        endValues = {
+          colour1: [0.8, 0.2, 0.4, 1.0],
+          colour2: [0.4, 0.8, 0.6, 1.0],
+          colour3: [0.6, 0.2, 0.8, 1.0],
+          spinSpeed: 20.0,
+          lighting: 1.2,
+        };
+        break;
+      case 3:
+        endValues = {
+          colour1: [0.2, 0.4, 0.6, 1.0],
+          colour2: [0.6, 0.8, 0.2, 1.0],
+          colour3: [0.8, 0.6, 0.4, 1.0],
+          spinSpeed: 25.0,
+          lighting: 1.5,
+        };
+        break;
+      case 4:
+        endValues = {
+          colour1: [0.6, 0.8, 0.2, 1.0],
+          colour2: [0.2, 0.6, 0.8, 1.0],
+          colour3: [0.4, 0.2, 0.6, 1.0],
+          spinSpeed: 30.0,
+          lighting: 1.8,
+        };
+        break;
+    }
+  }
+
+  function updateTransition(time) {
+    if (transitioning) {
+      const elapsedTime = time - transitionStartTime;
+      const t = Math.min(elapsedTime / transitionDuration, 1); // Normalize time to [0, 1]
+      const easedT = easeInOut(t); // Apply easing function
+
+      // Interpolate values
+      colour1 = interpolateArray(startValues.colour1, endValues.colour1, easedT);
+      colour2 = interpolateArray(startValues.colour2, endValues.colour2, easedT);
+      colour3 = interpolateArray(startValues.colour3, endValues.colour3, easedT);
+      spinSpeed = lerp(startValues.spinSpeed, endValues.spinSpeed, easedT);
+      lighting = lerp(startValues.lighting, endValues.lighting, easedT);
+
+      // End transition when complete
+      if (t === 1) {
+        transitioning = false;
+      }
+    }
+  }
+
   function render(time) {
     gl.clear(gl.COLOR_BUFFER_BIT);
+
+    // Update transition if active
+    updateTransition(time);
+
     gl.uniform1f(timeLoc, time * 0.001);
     gl.uniform2f(resLoc, canvas.width, canvas.height);
     gl.uniform2f(mouseLoc, mouseX, mouseY);
     gl.uniform1f(radiusLoc, hoverRadius); // Update hover radius
     gl.uniform4fv(colour1Loc, colour1); // Update base color 1
+    gl.uniform4fv(colour2Loc, colour2); // Update base color 2
+    gl.uniform4fv(colour3Loc, colour3); // Update base color 3
     gl.uniform1f(spinSpeedLoc, spinSpeed); // Update spin speed
     gl.uniform1f(lightingLoc, lighting); // Update lighting
     gl.drawArrays(gl.TRIANGLES, 0, 6);

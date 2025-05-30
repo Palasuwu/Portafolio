@@ -34,7 +34,7 @@ uniform float LIGHTING;
 
 // === Función para números aleatorios ===
 float rand(vec2 co) {
-    return fract(sin(dot(co, vec2(13.9898, 78.233))) * 43758.5453);
+    return fract(sin(dot(co, vec2(13.989, 78.233))) * 43758.5453);
 }
 
 // === Función que genera el fondo dinámico ===
