@@ -6,10 +6,10 @@ const text1_options = [
   "Card 5 Title",
 ];
 const text2_options = [
-  { text: "Learn more about Pochita", url: "https://example.com/pochita" },
-  { text: "Learn more about Pochita", url: "https://example.com/pochita" },
-  { text: "API Documentation", url: "https://example.com/api-docs" },
-  { text: "Spotify Recommendations", url: "https://example.com/spotify" },
+  { text: "Contactame" , url:"https://www.instagram.com/pala_sales/"},
+  { text: "Repo de Pochita ", url: "https://github.com/Palasuwu/LA4Css" },
+  { text: "Repo del API Incidentes ", url: "https://github.com/Palasuwu/ejercicio-API?tab=readme-ov-file" },
+  { text: "Repo del Proyecto ", url: "https://github.com/Charly2440/Recomendation-Engine-Proyecto-2?tab=readme-ov-file" },
   "Subtitle 5",
 ];
 const text3_options = [
@@ -111,5 +111,65 @@ document.addEventListener("keydown", (event) => {
     // Navigate to the previous card
     i = (i - 1 + text1_options.length) % text1_options.length;
     updateCarousel();
+  }
+});
+
+// Function to create and display the full-view window
+function showFullView(imageUrl) {
+  // Create the overlay container
+  const overlay = document.createElement('div');
+  overlay.id = 'image-overlay';
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0';
+  overlay.style.left = '0';
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.background = 'rgba(255, 255, 255, 0.2)';
+  overlay.style.backdropFilter = 'blur(10px)';
+  overlay.style.display = 'flex';
+  overlay.style.justifyContent = 'center';
+  overlay.style.alignItems = 'center';
+  overlay.style.zIndex = '1000';
+
+  // Create the image element
+  const fullImage = document.createElement('img');
+  fullImage.src = imageUrl;
+  fullImage.style.maxWidth = '90%';
+  fullImage.style.maxHeight = '90%';
+  fullImage.style.borderRadius = '10px';
+  fullImage.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
+
+  // Create the close button
+  const closeButton = document.createElement('button');
+  closeButton.textContent = 'X';
+  closeButton.style.position = 'absolute';
+  closeButton.style.top = '20px';
+  closeButton.style.right = '20px';
+  closeButton.style.background = 'rgba(255, 255, 255, 0.03)';
+  closeButton.style.border = 'none';
+  closeButton.style.borderRadius = '50%';
+  closeButton.style.padding = '10px';
+  closeButton.style.cursor = 'pointer';
+  closeButton.style.fontSize = '16px';
+  closeButton.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+
+  // Add event listener to close the overlay
+  closeButton.addEventListener('click', () => {
+    document.body.removeChild(overlay);
+  });
+
+  // Append elements to the overlay
+  overlay.appendChild(fullImage);
+  overlay.appendChild(closeButton);
+
+  // Append the overlay to the body
+  document.body.appendChild(overlay);
+}
+
+// Add click event listener to the image container
+currentOptionImage.addEventListener('click', () => {
+  const imageUrl = image_options[i];
+  if (imageUrl) {
+    showFullView(imageUrl);
   }
 });
