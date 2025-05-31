@@ -247,4 +247,53 @@ canvas {
     100% {
         transform: translate(140px, 0) scale(1.0);
     }
+
+   
+}
+
+/* Define the pulsating animation with more keyframes */
+@keyframes pulsate {
+    0% {
+        transform: scale(1); /* Normal size */
+        color: #000000; /* Default color */
+        text-shadow: 0px 0px 5px rgba(208, 80, 255, 0.3); /* Subtle glow */
+    }
+    20% {
+        transform: scale(1.05); /* Slightly larger */
+        color: #1e90ff; /* Brighter color */
+        text-shadow: 0px 0px 10px rgba(208, 80, 255, 0.5); /* Stronger glow */
+    }
+    40% {
+        transform: scale(1.1); /* Larger */
+        color: #00bfff; /* Even brighter color */
+        text-shadow: 0px 0px 15px rgba(208, 80, 255, 0.7); /* Intense glow */
+    }
+    60% {
+        transform: scale(1.05); /* Slightly smaller */
+        color: #1e90ff; /* Return to previous color */
+        text-shadow: 0px 0px 10px rgba(208, 80, 255, 0.5); /* Stronger glow */
+    }
+    80% {
+        transform: scale(1.02); /* Slightly smaller */
+        color: #000000; /* Return to default color */
+        text-shadow: 0px 0px 5px rgba(208, 80, 255, 0.3); /* Subtle glow */
+    }
+    100% {
+        transform: scale(1); /* Normal size */
+        color: #000000; /* Default color */
+        text-shadow: 0px 0px 5px rgba(208, 80, 255, 0.3); /* Subtle glow */
+    }
+}
+
+/* Apply the pulsating animation to links on hover */
+a:hover {
+    animation: pulsate 1s ease-in-out infinite; /* Smooth pulsating effect */
+    text-decoration: underline; /* Optional: Add underline on hover */
+}
+
+a{
+    text-shadow:  0px 0px 10px rgba(208, 80, 255, 0.586); /* Neon effect */
+    color: #000000;
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease; /* Smooth color transition */
 }
