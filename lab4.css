@@ -1,0 +1,177 @@
+h4{
+    position: relative;
+    width: max-content;
+    bottom: 100px;
+    left: -60px;
+}
+h4::after{
+    
+    content: ' ';
+    background: linear-gradient(to right, red , blue);
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    transition: 100ms;
+}
+h4:hover::after{
+
+    width: 0% ;
+}
+/* Cuerpo */
+.pochita {
+    width: 100px;
+    height: 100px;
+    background-color: #f25a29;
+    border-radius: 50%;
+    border: 1px solid black; /* Borde negro */
+    position: relative;
+    box-shadow: 0 0 40px rgba(242, 90, 41, 0.8);
+    animation: breathe 2s ease-in-out infinite;
+}
+
+/* Manija estilo */
+.pochita::before {
+    content: '';
+    width: 60px;
+    height: 30px;
+    position: absolute;
+    top: -22px;
+    left: 12px;
+    background: transparent;
+    border: 8px solid black;
+    border-bottom: none;
+    border-radius: 40px 40px 0 0;
+}
+
+/* Motosierra  */
+.pochita::after {
+    content: '';
+    width: 14px;
+    height: 50px;
+    background: repeating-linear-gradient(
+        to bottom,
+        #bbb,
+        #bbb 5px,
+        #ddd 5px,
+        #ddd 10px
+    );
+    position: absolute;
+    top: 25px;
+    left: 43px;
+    box-shadow: 0 0 3px #999;
+    border: 2px solid #999;
+    border-radius: 3px;
+}
+
+/* Ojos */
+.pochita .eye {
+    position: absolute;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Pupilas */
+.pochita .eye::before {
+    content: '';
+    width: 23px;
+    height: 26px;
+    background: black;
+    border-radius: 50%;
+
+}
+
+/* Posicionamiento especifico de cada ojo */
+.pochita .eye.left {
+    left: 10px;
+}
+
+.pochita .eye.right {
+    right: 6px;
+}
+
+/* Boca Left */ 
+.pochita .mouth {
+    width: 15px;
+    height: 23px;
+    background-color: #f25a29;
+    display: block;
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
+    border: 2px solid #561804;
+    transform: rotate(230deg);
+    left: 32px;
+    top: 55px;
+    position: absolute
+}
+/* Boca right */ 
+.pochita .mouth2 {
+    width: 15px;
+    height: 23px;
+    background-color: #f25a29;
+    display: block;
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
+    border: 2px solid #561804;
+    transform: rotate(-230deg);
+    left: 57px;
+    top: 55px;
+    position: absolute
+}
+
+/* boca */
+.pochita .mouth::before {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 20px;
+    transform: rotate(220deg);
+    border-bottom-right-radius: 500%;
+    border-top-right-radius: 500%;
+    background: rgb(241, 144, 99);
+    border: 1px solid black; /* Borde negro */
+    right: 5px;
+    bottom: -8px;
+    
+}
+
+/* Patitas (dos abajo) */
+.pochita .foot {
+    position: absolute;
+    width: 18px;
+    height: 10px;
+    background: #f25a29;
+    border: 1px solid black;
+    border-radius: 50%;
+    bottom: -2px;
+}
+
+.pochita .foot.left {
+    left: 15px;
+}
+
+.pochita .foot.right {
+    right: 15px;
+}
+
+@keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+
+#image .pochita {
+    position: relative; /* Ensure it stays within the container */
+    bottom: -70px;
+    margin: auto; /* Center the animation */
+    border: black 10px;
+    
+
+}

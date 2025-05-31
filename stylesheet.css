@@ -136,13 +136,16 @@ canvas {
     justify-content: flex-start;
     margin-bottom: 10px; /* Add spacing below text1 */
     cursor: pointer; /* Change cursor to pointer to indicate interactivity */
+    z-index: 1005;
 }
 
 #current-option-text1:hover {
     text-decoration: underline; /* Optional: Add underline on hover */
+    cursor : pointer; /* Ensure cursor is a pointer on hover */
+    
 }
 #current-option-text3 {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     width: 220px;
     height: auto;
     display: flex;
@@ -153,6 +156,7 @@ canvas {
     opacity: 0; /* Start with hidden state */
     transform: translateY(-10px); /* Slightly move up when hidden */
     transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for opacity and position */
+    text-shadow:  0px 0px 10px rgba(80, 246, 255, 0.586); /* Neon effect */
 }
 #current-option-text2 {
     font-size: 0.8rem;
@@ -201,8 +205,9 @@ canvas {
 }
 
 #image {
-    height: 240px;
+    height: 250px;
     width: 240px;
+    border: 2px solid black; /* Black border */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

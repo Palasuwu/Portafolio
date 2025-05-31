@@ -62,9 +62,9 @@ async function init() {
 
   // Initial values for shader constants
   let hoverRadius = 0.0;
-  let colour1 = [0.0, 0.6, 0.8, 1.0];
-  let colour2 = [0.2, 0.8, 0.4, 1.0];
-  let colour3 = [0.8, 0.4, 0.2, 1.0];
+  let colour1 = [0.0, 0.0, 1.0, 0.9];
+  let colour2 = [0.1, 0.2, 0.0, 6.0];
+  let colour3 = [0.0, 0.1, 0.0, 0.0];
   let spinSpeed = 1.0;
   let lighting = 1.0;
 
