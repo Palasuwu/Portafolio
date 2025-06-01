@@ -1,7 +1,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    overflow: hidden; /* Prevent scrolling */
+    overflow: hidden ; /* Prevent scrolling */
     background: black;
     height: 100%; /* Ensure the body spans the full height */
 }
@@ -103,8 +103,8 @@ canvas {
 
     /* Glass-like background */
     background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
-    backdrop-filter: blur(10px); /* Blur effect for the glass look */
-    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    backdrop-filter: blur(15px); /* Blur effect for the glass look */
+    -webkit-backdrop-filter: blur(15px); /* Safari support */
     border-radius: 15px; /* Rounded corners */
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     border: 1px solid rgba(255, 255, 255, 0.3); /* Optional border for definition */
@@ -162,6 +162,7 @@ canvas {
     display: flex;
     position: fixed;
     bottom: 9.8px;
+    
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
@@ -296,4 +297,65 @@ a{
     color: #000000;
     text-decoration: none; /* Remove underline */
     transition: color 0.3s ease; /* Smooth color transition */
+}
+
+@media (max-width: 768px) {
+    #carousel-wrapper {
+        top: 55%;
+        padding: 1rem;
+    }
+
+    #menu {
+        flex-direction: column;
+        width: 90vw;
+        max-width: 95%;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    #current-option {
+        max-width: 100%;
+        align-items: center;
+    }
+
+    #current-option-text1,
+    #current-option-text2,
+    #current-option-text3 {
+        align-items: center;
+        text-align: center;
+        max-width: 100%;
+    }
+
+    #image {
+        width: 80vw;
+        max-width: 240px;
+        margin: 0 auto;
+    }
+
+    
+    
+    #next-option {
+        bottom: 1px;
+        right: 1vh;
+        transform: rotate(-90deg);
+    }
+
+    #previous-option {
+        bottom: 1px;
+        left: 1vh;
+        transform: rotate(90deg);
+    }
+
+    .top-bar {
+        flex-direction: column;
+        font-size: 1rem;
+        gap: 5px;
+    }
+
+    #image {
+        scale: 1.0;
+        width: 30%;
+        height: 40%;
+        margin: 0 auto;
+    }
 }
