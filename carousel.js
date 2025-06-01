@@ -4,7 +4,7 @@ const text1_options = [
   "Pochita con CSS y HTML Basico ",
   "API conectada a PostgreSQL con Python y Flask ",
   "Recomendaciones de Musica con arboles binarios ",
-  "Card 5 Title",
+  "No se que poner aqui :(( ",
 ];
 const text2_options = [
   { text: "Contactame" , url:"https://www.instagram.com/pala_sales/"},

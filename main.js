@@ -314,6 +314,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   toggleButton.addEventListener('click', () => {
     controlsVisible = !controlsVisible;
+    toggleControlsVisibility();
+  });
+
+  // Add event listener for spacebar to toggle controls
+  document.addEventListener('keydown', (event) => {
+    if (event.key === ' ') {
+      event.preventDefault(); // Prevent default spacebar scrolling behavior
+      controlsVisible = !controlsVisible;
+      toggleControlsVisibility();
+    }
+  });
+
+  function toggleControlsVisibility() {
     if (controlsVisible) {
       controls.style.display = 'block';
       toggleButton.textContent = 'Hide Controls';
@@ -321,5 +334,28 @@ document.addEventListener('DOMContentLoaded', () => {
       controls.style.display = 'none';
       toggleButton.textContent = 'Show Controls';
     }
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const controls = document.querySelector('.controls'); // Select the controls element
+
+  let controlsVisible = false; // Track visibility state
+
+  // Add event listener for spacebar to toggle controls
+  document.addEventListener('keydown', (event) => {
+    if (event.key === ' ') {
+      event.preventDefault(); // Prevent default spacebar scrolling behavior
+      controlsVisible = !controlsVisible; // Toggle visibility state
+      toggleControlsVisibility();
+    }
   });
+
+  function toggleControlsVisibility() {
+    if (controlsVisible) {
+      controls.style.display = 'block'; // Show controls
+    } else {
+      controls.style.display = 'none'; // Hide controls
+    }
+  }
 });
