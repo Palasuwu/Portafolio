@@ -67,9 +67,6 @@ canvas {
     z-index: 102;
 }
 
-.shader-container:hover {
-    cursor: crosshair;
-}
 
 .controls input[type="range"] {
     width: 100%;

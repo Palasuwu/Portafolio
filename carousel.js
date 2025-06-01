@@ -1,3 +1,4 @@
+/* No c porque no se actualiza en el git :( */
 const text1_options = [
   "Quien soy ? ",
   "Pochita con CSS y HTML Basico ",
