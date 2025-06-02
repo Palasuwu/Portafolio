@@ -13,7 +13,7 @@ const text2_options = [
   { text: "Repo del API Incidentes ", url: "https://github.com/Palasuwu/ejercicio-API?tab=readme-ov-file" },
   { text: "Repo del Proyecto ", url: "https://github.com/Charly2440/Recomendation-Engine-Proyecto-2?tab=readme-ov-file" },
   {text: "Stats de Github ",url: " https://github.com/Palasuwu/Palasuwu/tree/main"},
-  {text:"CV",url:"/cv.pdf"}
+  {text:"CV",url:"Portafolio/cv.pdf"}
 
 ];
 const text3_options = [
