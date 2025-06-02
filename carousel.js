@@ -13,7 +13,7 @@ const text2_options = [
   { text: "Repo del API Incidentes ", url: "https://github.com/Palasuwu/ejercicio-API?tab=readme-ov-file" },
   { text: "Repo del Proyecto ", url: "https://github.com/Charly2440/Recomendation-Engine-Proyecto-2?tab=readme-ov-file" },
   {text: "Stats de Github ",url: " https://github.com/Palasuwu/Palasuwu/tree/main"},
-  {text:"Dale click a la imagen para ver mas detalles",url:"./cv.pdf"}
+  {text:"CV",url:"https://drive.google.com/file/d/1XeFVjXgKUycITD1To66G58xBD_49ltGP/view?usp=sharing"}
 
 ];
 const text3_options = [
@@ -22,6 +22,7 @@ const text3_options = [
   "API para gestionar tickets de incidentes de dispositivos en un entorno laboral, conectada a PostgreSQL. Incluye métodos GET, POST, PUT y DELETE para consultar, crear, actualizar y eliminar incidentes",
   "Para este proyecto se utilizó el API de Spotify para obtener recomendaciones de música basadas en un árbol binario. El Arbol Y base de Datos fue implementado usando Neo4j , una plataforma de base de datos graficos ",
   "Entre en lo que mas domino son HTML , CSS Y JavaScript para creacion de frontends , tambien tengo experiencia en base de datos relacionales como SQL y la integracion de las mismas para crear API's .",
+  " "
 ];
 const image_options = [
   "assets/me.jpeg",
@@ -29,7 +30,7 @@ const image_options = [
   "assets/API.png",
   "assets/spot.png",
   "assets/stats.png",
-  "assets/cv.pdf" 
+  "assets/cv1.png" 
 
 ];
 let i = 0;
