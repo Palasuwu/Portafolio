@@ -1,30 +1,36 @@
 /* No c porque no se actualiza en el git :( */
 const text1_options = [
-  "Quien soy ? ",
+  "¿ Quien soy ? ",
   "Pochita con CSS y HTML Basico ",
   "API conectada a PostgreSQL con Python y Flask ",
   "Recomendaciones de Musica con arboles binarios ",
-  "No se que poner aqui :(( ",
+  "Sección de habilidades",
+  " Estas interesado en mi experiencia ? "
 ];
 const text2_options = [
   { text: "Contactame" , url:"https://www.instagram.com/pala_sales/"},
   { text: "Repo de Pochita ", url: "https://github.com/Palasuwu/LA4Css" },
   { text: "Repo del API Incidentes ", url: "https://github.com/Palasuwu/ejercicio-API?tab=readme-ov-file" },
   { text: "Repo del Proyecto ", url: "https://github.com/Charly2440/Recomendation-Engine-Proyecto-2?tab=readme-ov-file" },
-  "Subtitle 5",
+  {text: "Stats de Github ",url: " https://github.com/Palasuwu/Palasuwu/tree/main"},
+  {text:"Dale click a la imagen para ver mas detalles",url:"../assets/cv.pdf"}
+
 ];
 const text3_options = [
   "Me llamo Jorge Palacios , soy un estudiante de tercer año de Computer Science en la Universidad del Valle de Guatemala . Como devoloper Junior me apasiona la programación y el desarrollo web . En mi tiempo libre disfruto aprender nuevas tecnologías y trabajar en proyectos personales.",
   "Un proyecto creativo que recrea visualmente al personaje Pochita utilizando unicamente HTML y CSS avanzado. Demuestra cómo es posible lograr ilustraciones, animaciones y disenos detallados solo con CSS, sirviendo tanto como recurso de aprendizaje como una muestra de las capacidades modernas de CSS ",
   "API para gestionar tickets de incidentes de dispositivos en un entorno laboral, conectada a PostgreSQL. Incluye métodos GET, POST, PUT y DELETE para consultar, crear, actualizar y eliminar incidentes",
   "Para este proyecto se utilizó el API de Spotify para obtener recomendaciones de música basadas en un árbol binario. El Arbol Y base de Datos fue implementado usando Neo4j , una plataforma de base de datos graficos ",
-  "This is a detailed description for card 5. It provides more information about the topic.",
+  "Entre en lo que mas domino son HTML , CSS Y JavaScript para creacion de frontends , tambien tengo experiencia en base de datos relacionales como SQL y la integracion de las mismas para crear API's .",
 ];
 const image_options = [
   "assets/me.jpeg",
   null, // Card 2 will use the Pochita animation instead of an image
   "assets/API.png",
   "assets/spot.png",
+  "assets/stats.png",
+  "assets/cv.pdf" 
+
 ];
 let i = 0;
 
