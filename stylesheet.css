@@ -24,33 +24,6 @@ canvas {
     
 }
 
-.top-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.626);
-    color: white;
-    padding: 10px;
-    text-align: center;
-    z-index: 2;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-.top-bar button {
-    background: #007bff0a;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.top-bar button:hover {
-    background: #0056b3;
-}
 
 .controls {
     position: absolute;
@@ -112,24 +85,25 @@ canvas {
 }
 
 #current-option {
-    position: relative;
+    position: sticky;
     width: 80%;
     height: 80%;
-    transform: translate(-25%, 0%);
+    transform: translate(-25%, -25%);
     display: flex;
     flex-direction: column; /* Stack elements vertically */
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    padding: 10px;
 }
 
 #current-option-text1 {
-    font-size: 1.7rem;
+    font-size: 3.7rem;
     line-height: 3rem;
     width: 220px;
     height: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
     margin-bottom: 10px; /* Add spacing below text1 */
@@ -161,7 +135,7 @@ canvas {
     width: 220px;
     height: auto;
     display: flex;
-    position: fixed;
+    position : relative;
     bottom: 9.8px;
     
     flex-direction: column;
@@ -173,14 +147,47 @@ canvas {
 #current-option-text3.expanded {
     display: flex; /* Ensure it is visible */
     opacity: 4; /* Fade in */
-    transform: translateY(0); /* Move to original position */
+    transform: translateY(80px); /* Move to original position */
 }
 
 #current-option-text3.hidden {
     display: flex; /* Keep it in the layout but invisible */
     opacity: 0; /* Fade out */
     transform: translateY(-10px); /* Move slightly up */
+
 }
+
+#image {
+    height: 250px;
+    width: 240px;
+    border: 2px solid black; /* Black border */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 101;
+    position: absolute;
+    transform: translate(140px, 0);
+}
+
+#image:hover {
+    animation: resize 0.8s ease-in-out forwards; /* Increased duration for smoother animation */
+    box-shadow: 0 0 10px rgba(80, 246, 255, 0.586); /* Subtle shadow on hover */
+}
+
+/* Apply the pulsating animation to links on hover */
+a:hover {
+    animation: pulsate 1s ease-in-out infinite; /* Smooth pulsating effect */
+    text-decoration: underline; /* Optional: Add underline on hover */
+}
+
+a{
+    text-shadow:  0px 0px 10px rgba(208, 80, 255, 0.586); /* Neon effect */
+    color: #000000;
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+/* No se usan ya pero si los borro peta la pagina y ya no quiero tocar los arrays pipipip :( */
 #previous-option,
 #next-option {
     width: 1.5rem;
@@ -206,22 +213,6 @@ canvas {
     box-shadow: 0 0 4px rgba(80, 246, 255, 0.586); /* Subtle shadow on hover */
 }
 
-#image {
-    height: 250px;
-    width: 240px;
-    border: 2px solid black; /* Black border */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: 101;
-    position: absolute;
-    transform: translate(140px, 0);
-}
-
-#image:hover {
-    animation: resize 0.8s ease-in-out forwards; /* Increased duration for smoother animation */
-    box-shadow: 0 0 10px rgba(80, 246, 255, 0.586); /* Subtle shadow on hover */
-}
 
 /* Define the animation with 8 keyframes */
 @keyframes resize {
@@ -287,18 +278,6 @@ canvas {
     }
 }
 
-/* Apply the pulsating animation to links on hover */
-a:hover {
-    animation: pulsate 1s ease-in-out infinite; /* Smooth pulsating effect */
-    text-decoration: underline; /* Optional: Add underline on hover */
-}
-
-a{
-    text-shadow:  0px 0px 10px rgba(208, 80, 255, 0.586); /* Neon effect */
-    color: #000000;
-    text-decoration: none; /* Remove underline */
-    transition: color 0.3s ease; /* Smooth color transition */
-}
 
 @media (max-width: 768px) {
     #carousel-wrapper {
