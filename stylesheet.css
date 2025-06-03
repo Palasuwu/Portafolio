@@ -186,7 +186,7 @@ canvas {
     width: 1.5rem;
     height: 1.5rem;
     border: none;
-    display: block;
+    display: none;
     cursor: pointer;
     background-size: cover;
     position: absolute;
