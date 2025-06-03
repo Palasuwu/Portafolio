@@ -99,7 +99,7 @@ async function init() {
   let sindex = 0; // Shader index
 
   // Reference the dynamically created buttons
-  const indexButtons = document.querySelectorAll('#index-button-container button');
+  const indexButtons = document.querySelectorAll('#index-button-container span'); // Use 'span' if buttons are spans
 
   // Add event listeners for "Next" and "Previous" buttons
   optionNext.addEventListener('click', () => {
@@ -120,6 +120,7 @@ async function init() {
       sindex = index; // Update shader index
       startTransition(sindex); // Trigger shader transition
       updateCarousel(sindex); // Update carousel content
+      updateIndexButtons(); // Update button styles
     });
   });
 
@@ -127,6 +128,13 @@ async function init() {
   function updateCarousel(index) {
     // Logic to update the carousel content based on the index
     console.log(`Updating carousel to index: ${index}`);
+  }
+
+  // Function to update button styles based on the current index
+  function updateIndexButtons() {
+    indexButtons.forEach((button, index) => {
+      button.style.color = index === sindex ? 'rgba(80, 246, 255, 0.8)' : 'white'; // Highlight active button
+    });
   }
 
   // Function to update shader uniforms based on the current card index
