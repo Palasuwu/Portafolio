@@ -85,17 +85,6 @@ function updateCarousel() {
 // Initialize carousel content
 updateCarousel();
 
-// Handle "Next" button click
-optionNext.onclick = function () {
-  i = (i + 1) % text1_options.length;
-  updateCarousel();
-};
-
-// Handle "Previous" button click
-optionPrevious.onclick = function () {
-  i = (i - 1 + text1_options.length) % text1_options.length;
-  updateCarousel();
-};
 
 // Handle card click to toggle detailed description
 currentOptionText1.onclick = function () {
@@ -182,6 +171,16 @@ currentOptionImage.addEventListener('click', () => {
   }
 });
 
+// Array for button titles
+const button_titles = [
+  "About Me",
+  "Pochita Project",
+  "API with PostgreSQL",
+  "Music Recommendations",
+  "Skills Section",
+  "Contact Me"
+];
+
 // Create index buttons dynamically
 const indexButtonContainer = document.createElement('div');
 indexButtonContainer.id = 'index-button-container';
@@ -190,39 +189,49 @@ indexButtonContainer.style.bottom = '10px'; // Adjust position relative to the c
 indexButtonContainer.style.left = '50%';
 indexButtonContainer.style.transform = 'translateX(-50%)';
 indexButtonContainer.style.display = 'flex';
-indexButtonContainer.style.gap = '10px';
+indexButtonContainer.style.gap = '20px'; // Add spacing between links
 indexButtonContainer.style.zIndex = '1000';
-
+indexButtonContainer.style.flexWrap = 'wrap'; // Allow wrapping for smaller screens
+indexButtonContainer.style.justifyContent = 'center'; // Center align buttons
 // Generate buttons for each card
-text1_options.forEach((_, index) => {
-  const button = document.createElement('button');
-  button.textContent = index + 1; // Display index as 1-based
-  button.style.padding = '8px';
-  button.style.border = 'none';
-  button.style.borderRadius = '50%';
+button_titles.forEach((title, index) => {
+  const button = document.createElement('span'); // Use <span> instead of <button>
+  button.textContent = title; // Use the title from button_titles
   button.style.cursor = 'pointer';
-  button.style.background = index === i ? 'rgba(80, 246, 255, 0.8)' : 'rgba(255, 255, 255, 0.2)';
-  button.style.transition = 'background 0.3s ease';
+  button.style.color = index === i ? 'rgba(80, 246, 255, 0.8)' : 'white'; // Highlight active link
+  button.style.fontSize = '1rem';
+  button.style.fontWeight = 'bold';
+  button.style.textDecoration = 'none'; // Remove underline
+  button.style.transition = 'color 0.3s ease';
+  button.style.textShadow = '0 0 5px rgba(80, 246, 255, 0.5)'; // Add subtle glow effect
+
+  // Add hover effect
+  button.addEventListener('mouseover', () => {
+    button.style.color = 'rgba(80, 246, 255, 1.0)'; // Brighter on hover
+  });
+  button.addEventListener('mouseout', () => {
+    button.style.color = index === i ? 'rgba(80, 246, 255, 0.8)' : 'white'; // Reset color
+  });
 
   // Add click event to navigate to the corresponding card
   button.addEventListener('click', () => {
     i = index; // Set the current index to the button's index
     updateCarousel();
-    updateIndexButtons(); // Update button styles
+    updateIndexButtons(); // Update link styles
   });
 
   indexButtonContainer.appendChild(button);
 });
 
 // Append the button container to the carousel-wrapper (or a specific card container)
-const carouselWrapper = document.getElementById('carousel-wrapper');
+const carouselWrapper = document.getElementById('carousel-wrapper'); // Ensure this ID matches your HTML structure
 carouselWrapper.appendChild(indexButtonContainer);
 
-// Function to update button styles based on the current index
+// Function to update link styles based on the current index
 function updateIndexButtons() {
-  const buttons = indexButtonContainer.querySelectorAll('button');
+  const buttons = indexButtonContainer.querySelectorAll('span');
   buttons.forEach((button, index) => {
-    button.style.background = index === i ? 'rgba(80, 246, 255, 0.8)' : 'rgba(255, 255, 255, 0.2)';
+    button.style.color = index === i ? 'rgba(80, 246, 255, 0.8)' : 'white'; // Highlight active link
   });
 }
 

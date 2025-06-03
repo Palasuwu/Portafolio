@@ -96,20 +96,41 @@ async function init() {
   // Event listeners for "Next" and "Previous" buttons
   const optionNext = document.getElementById('next-option');
   const optionPrevious = document.getElementById('previous-option');
-  let currentIndex = 0;
+  let sindex = 0; // Shader index
 
+  // Reference the dynamically created buttons
+  const indexButtons = document.querySelectorAll('#index-button-container button');
+
+  // Add event listeners for "Next" and "Previous" buttons
   optionNext.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % 5; // Assuming 5 cards
-    startTransition(currentIndex);
+    sindex = (sindex + 1) % 5; // Assuming 5 cards
+    startTransition(sindex); // Trigger shader transition
+    updateCarousel(sindex); // Update carousel content
   });
 
   optionPrevious.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + 5) % 5; // Assuming 5 cards
-    startTransition(currentIndex);
+    sindex = (sindex - 1 + 5) % 5; // Assuming 5 cards
+    startTransition(sindex); // Trigger shader transition
+    updateCarousel(sindex); // Update carousel content
   });
 
+  // Add event listeners for the index buttons
+  indexButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+      sindex = index; // Update shader index
+      startTransition(sindex); // Trigger shader transition
+      updateCarousel(sindex); // Update carousel content
+    });
+  });
+
+  // Function to update the carousel content
+  function updateCarousel(index) {
+    // Logic to update the carousel content based on the index
+    console.log(`Updating carousel to index: ${index}`);
+  }
+
   // Function to update shader uniforms based on the current card index
-  function updateShaderUniforms(index) {
+  function updateShaderUniforms(sindex) {
     // --------------- Initial Shader Values ---------------
     // These values correspond to the initial state of the shader (before any button interaction).
     switch (index) {
@@ -193,15 +214,15 @@ async function init() {
     };
 
     // Set the target values based on the new card index
-    switch (index) {
+    switch (sindex) {
       // --------------- Card 1: "Quien soy ?" ---------------
       case 0:
         endValues = { 
           colour1 : [0.0, 0.6, 0.8, 1.0],
           colour2 : [0.2, 0.8, 0.4, 1.0],
           colour3 : [0.8, 0.4, 0.2, 1.0],
-          spinSpeed :1.0,
-          lighting : 1.0
+          spinSpeed :52.0,
+          lighting : 9.0
         };
         break;
 

@@ -380,3 +380,44 @@ a{
 }
 
 
+/* Default styles for the button container */
+#index-button-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+  max-width: 100%; /* Ensure it doesn't overflow horizontally */
+  overflow-x: auto; /* Allow horizontal scrolling if needed */
+  position: absolute; /* Position it relative to the parent container */
+  bottom: 50px; /* Move the container up by 50px */
+  white-space: nowrap; /* Prevent text wrapping inside buttons */
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  #index-button-container {
+    gap: 10px; /* Reduce spacing between buttons */
+    bottom: 70px; /* Move it further up for smaller screens */
+  }
+
+  #index-button-container span {
+    font-size: 0.9rem; /* Reduce font size */
+  }
+}
+
+@media (max-width: 480px) {
+  #index-button-container {
+    flex-wrap: nowrap; /* Prevent wrapping */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    justify-content: flex-start; /* Align buttons to the left */
+    top: 9px; /* Move it even further up for very small screens */
+    max-width: 100%; /* Ensure it fits within the viewport */
+  }
+
+  #index-button-container span {
+    font-size: 0.8rem; /* Further reduce font size */
+    text-align: center; /* Center-align text */
+  }
+}
