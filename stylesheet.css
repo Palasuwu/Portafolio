@@ -21,6 +21,7 @@ canvas {
     display: block; /* Remove inline spacing */
     width: 100%; /* Full width */
     height: 100%; /* Full height */
+    
 }
 
 .top-bar {
@@ -80,7 +81,7 @@ canvas {
     transform: translate(-50%, -50%); /* Adjust for centering */
     z-index: 5; /* Ensure it appears above the shader */
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     width: auto;
@@ -89,8 +90,8 @@ canvas {
 }
 
 #menu {
-    height: 380px;
-    width: 720px;
+    height: 750px;
+    width: 850px;
     overflow: hidden;
     font-weight: 700;
     line-height: 1;

@@ -181,3 +181,50 @@ currentOptionImage.addEventListener('click', () => {
     showFullView(imageUrl);
   }
 });
+
+// Create index buttons dynamically
+const indexButtonContainer = document.createElement('div');
+indexButtonContainer.id = 'index-button-container';
+indexButtonContainer.style.position = 'absolute';
+indexButtonContainer.style.bottom = '10px'; // Adjust position relative to the card
+indexButtonContainer.style.left = '50%';
+indexButtonContainer.style.transform = 'translateX(-50%)';
+indexButtonContainer.style.display = 'flex';
+indexButtonContainer.style.gap = '10px';
+indexButtonContainer.style.zIndex = '1000';
+
+// Generate buttons for each card
+text1_options.forEach((_, index) => {
+  const button = document.createElement('button');
+  button.textContent = index + 1; // Display index as 1-based
+  button.style.padding = '8px';
+  button.style.border = 'none';
+  button.style.borderRadius = '50%';
+  button.style.cursor = 'pointer';
+  button.style.background = index === i ? 'rgba(80, 246, 255, 0.8)' : 'rgba(255, 255, 255, 0.2)';
+  button.style.transition = 'background 0.3s ease';
+
+  // Add click event to navigate to the corresponding card
+  button.addEventListener('click', () => {
+    i = index; // Set the current index to the button's index
+    updateCarousel();
+    updateIndexButtons(); // Update button styles
+  });
+
+  indexButtonContainer.appendChild(button);
+});
+
+// Append the button container to the carousel-wrapper (or a specific card container)
+const carouselWrapper = document.getElementById('carousel-wrapper');
+carouselWrapper.appendChild(indexButtonContainer);
+
+// Function to update button styles based on the current index
+function updateIndexButtons() {
+  const buttons = indexButtonContainer.querySelectorAll('button');
+  buttons.forEach((button, index) => {
+    button.style.background = index === i ? 'rgba(80, 246, 255, 0.8)' : 'rgba(255, 255, 255, 0.2)';
+  });
+}
+
+// Call updateIndexButtons initially to set the correct styles
+updateIndexButtons();
