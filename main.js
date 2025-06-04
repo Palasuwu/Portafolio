@@ -1,3 +1,4 @@
+// Updated main.js
 const canvas = document.getElementById('webgl-canvas');
 const gl = canvas.getContext('webgl');
 
@@ -60,134 +61,19 @@ async function init() {
   const spinSpeedLoc = gl.getUniformLocation(program, 'SPIN_SPEED');
   const lightingLoc = gl.getUniformLocation(program, 'LIGHTING');
 
-  // Initial values for shader constants
-  let hoverRadius = 0.0;
-  let colour1 = [0.0, 0.0, 1.0, 0.9];
-  let colour2 = [0.1, 0.2, 0.0, 6.0];
-  let colour3 = [0.0, 0.1, 0.0, 0.0];
-  let spinSpeed = 1.0;
-  let lighting = 1.0;
+  // Initial values
+  let hoverRadius = 0.15;
+  let colour1 = [0.0, 0.6, 0.8, 1.0];
+  let colour2 = [0.2, 0.8, 0.4, 1.0];
+  let colour3 = [0.8, 0.4, 0.2, 1.0];
+  let spinSpeed = 52.0;
+  let lighting = 9.0;
 
-  // Update shader constants from sliders
-  document.getElementById('hoverRadius').addEventListener('input', (e) => {
-    hoverRadius = parseFloat(e.target.value);
+  // Listen for shader updates from carousel.js
+  window.addEventListener('shader-update', (e) => {
+    const params = e.detail;
+    startTransition(params);
   });
-
-  document.getElementById('colour1R').addEventListener('input', (e) => {
-    colour1[0] = parseFloat(e.target.value);
-  });
-
-  document.getElementById('colour1G').addEventListener('input', (e) => {
-    colour1[1] = parseFloat(e.target.value);
-  });
-
-  document.getElementById('colour1B').addEventListener('input', (e) => {
-    colour1[2] = parseFloat(e.target.value);
-  });
-
-  document.getElementById('spinSpeed').addEventListener('input', (e) => {
-    spinSpeed = parseFloat(e.target.value);
-  });
-
-  document.getElementById('lighting').addEventListener('input', (e) => {
-    lighting = parseFloat(e.target.value);
-  });
-
-  // Event listeners for "Next" and "Previous" buttons
-  const optionNext = document.getElementById('next-option');
-  const optionPrevious = document.getElementById('previous-option');
-  let sindex = 0; // Shader index
-
-  // Reference the dynamically created buttons
-  const indexButtons = document.querySelectorAll('#index-button-container span'); // Use 'span' if buttons are spans
-
-  // Add event listeners for "Next" and "Previous" buttons
-  optionNext.addEventListener('click', () => {
-    sindex = (sindex + 1) % 5; // Assuming 5 cards
-    startTransition(sindex); // Trigger shader transition
-    updateCarousel(sindex); // Update carousel content
-  });
-
-  optionPrevious.addEventListener('click', () => {
-    sindex = (sindex - 1 + 5) % 5; // Assuming 5 cards
-    startTransition(sindex); // Trigger shader transition
-    updateCarousel(sindex); // Update carousel content
-  });
-
-  // Add event listeners for the index buttons
-  indexButtons.forEach((button, index) => {
-    button.addEventListener('click', () => {
-      sindex = index; // Update shader index
-      startTransition(sindex); // Trigger shader transition
-      updateCarousel(sindex); // Update carousel content
-      updateIndexButtons(); // Update button styles
-    });
-  });
-
-  // Function to update the carousel content
-  function updateCarousel(index) {
-    // Logic to update the carousel content based on the index
-    console.log(`Updating carousel to index: ${index}`);
-  }
-
-  // Function to update button styles based on the current index
-  function updateIndexButtons() {
-    indexButtons.forEach((button, index) => {
-      button.style.color = index === sindex ? 'rgba(80, 246, 255, 0.8)' : 'white'; // Highlight active button
-    });
-  }
-
-  // Function to update shader uniforms based on the current card index
-  function updateShaderUniforms(sindex) {
-    // --------------- Initial Shader Values ---------------
-    // These values correspond to the initial state of the shader (before any button interaction).
-    switch (index) {
-      case 0: // Card 1: "Quien soy ?"
-      let colour1 = [0.0, 0.6, 0.8, 1.0];
-      let colour2 = [0.2, 0.8, 0.4, 1.0];
-      let colour3 = [0.8, 0.4, 0.2, 1.0];
-      let spinSpeed = 1.0;
-      let lighting = 1.0;
-        break;
-       
-
-      // --------------- Card 2: "Card 2 Title" ---------------
-      case 1:
-        colour1 = [0.4, 0.6, 0.8, 1.0]; // Blue tone
-        colour2 = [0.8, 0.8, 0.2, 1.0]; // Yellow tone
-        colour3 = [0.2, 0.4, 0.6, 1.0]; // Dark blue tone
-        spinSpeed = 2.0; // Faster spin speed
-        lighting = 0.8; // Slightly dimmer lighting
-        break;
-
-      // --------------- Card 3: "Card 3 Title" ---------------
-      case 2:
-        colour1 = [0.8, 0.2, 0.4, 1.0]; // Red tone
-        colour2 = [0.4, 0.8, 0.6, 1.0]; // Teal tone
-        colour3 = [0.6, 0.2, 0.8, 1.0]; // Purple tone
-        spinSpeed = 3.0; // Moderate spin speed
-        lighting = 1.2; // Slightly brighter lighting
-        break;
-
-      // --------------- Card 4: "Card 4 Title" ---------------
-      case 3:
-        colour1 = [0.2, 0.4, 0.6, 1.0]; // Cyan tone
-        colour2 = [0.6, 0.8, 0.2, 1.0]; // Lime tone
-        colour3 = [0.8, 0.6, 0.4, 1.0]; // Brown tone
-        spinSpeed = 4.0; // Moderate spin speed
-        lighting = 1.5; // Bright lighting
-        break;
-
-      // --------------- Card 5: "Card 5 Title" ---------------
-      case 4:
-        colour1 = [0.6, 0.8, 0.2, 1.0]; // Lime tone
-        colour2 = [0.2, 0.6, 0.8, 1.0]; // Cyan tone
-        colour3 = [0.4, 0.2, 0.6, 1.0]; // Purple tone
-        spinSpeed = 5.0; // Moderate spin speed
-        lighting = 1.8; // Bright lighting
-        break;
-    }
-  }
 
   function easeInOut(t) {
     return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
@@ -202,17 +88,15 @@ async function init() {
   }
 
   let transitionStartTime = null;
-  let transitionDuration = 3500; // Increased duration for smoother transitions
+  let transitionDuration = 2000;
   let transitioning = false;
   let startValues = {};
   let endValues = {};
 
-  function startTransition(index) {
+  function startTransition(params) {
     transitioning = true;
     transitionStartTime = performance.now();
 
-    // Save the current values as the starting point
-    // --------------- Starting Values ---------------
     startValues = {
       colour1: [...colour1],
       colour2: [...colour2],
@@ -221,79 +105,21 @@ async function init() {
       lighting: lighting,
     };
 
-    // Set the target values based on the new card index
-    switch (sindex) {
-      // --------------- Card 1: "Quien soy ?" ---------------
-      case 0:
-        endValues = { 
-          colour1 : [0.0, 0.6, 0.8, 1.0],
-          colour2 : [0.2, 0.8, 0.4, 1.0],
-          colour3 : [0.8, 0.4, 0.2, 1.0],
-          spinSpeed :52.0,
-          lighting : 9.0
-        };
-        break;
-
-      // --------------- Card 2: "Card 2 Title" ---------------
-      case 1:
-        endValues = {
-          colour1: [0.4, 0.6, 0.8, 1.0], // Blue tone
-          colour2: [0.8, 0.8, 0.2, 1.0], // Yellow tone
-          colour3: [0.2, 0.4, 0.6, 1.0], // Dark blue tone
-          spinSpeed: 1.0, // Faster spin speed
-          lighting: 0.8, // Slightly dimmer lighting
-        };
-        break;
-
-      // --------------- Card 3: "Card 3 Title" ---------------
-      case 2:
-        endValues = {
-          colour1: [0.8, 0.2, 0.4, 1.0], // Red tone
-          colour2: [0.4, 0.8, 0.6, 1.0], // Teal tone
-          colour3: [0.6, 0.2, 0.8, 1.0], // Purple tone
-          spinSpeed: 3.0, // Slow spin speed
-          lighting: 1.0, // Slightly brighter lighting
-        };
-        break;
-
-      // --------------- Card 4: "Card 4 Title" ---------------
-      case 3:
-        endValues = {
-          colour1: [0.0, 0.4, 0.6, 1.0], // Cyan tone
-          colour2: [0.6, 0.8, 0.2, 1.0], // Lime tone
-          colour3: [0.8, 0.6, 0.4, 1.0], // Brown tone
-          spinSpeed: 4.0, // Moderate spin speed
-          lighting: 0.5, // Dim lighting
-        };
-        break;
-
-      // --------------- Card 5: "Card 5 Title" ---------------
-      case 4:
-        endValues = {
-          colour1: [0.6, 0.8, 0.2, 1.0], // Lime tone
-          colour2: [0.2, 0.6, 0.8, 1.0], // Cyan tone
-          colour3: [0.4, 0.2, 0.6, 1.0], // Purple tone
-          spinSpeed: 5.0, // Moderate spin speed
-          lighting: 1.0, // Normal lighting
-        };
-        break;
-    }
+    endValues = params;
   }
 
   function updateTransition(time) {
     if (transitioning) {
       const elapsedTime = time - transitionStartTime;
-      const t = Math.min(elapsedTime / transitionDuration, 1); // Normalize time to [0, 1]
-      const easedT = easeInOut(t); // Apply easing function
+      const t = Math.min(elapsedTime / transitionDuration, 1);
+      const easedT = easeInOut(t);
 
-      // Interpolate values
       colour1 = interpolateArray(startValues.colour1, endValues.colour1, easedT);
       colour2 = interpolateArray(startValues.colour2, endValues.colour2, easedT);
       colour3 = interpolateArray(startValues.colour3, endValues.colour3, easedT);
       spinSpeed = lerp(startValues.spinSpeed, endValues.spinSpeed, easedT);
       lighting = lerp(startValues.lighting, endValues.lighting, easedT);
 
-      // End transition when complete
       if (t === 1) {
         transitioning = false;
       }
@@ -303,18 +129,17 @@ async function init() {
   function render(time) {
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-    // Update transition if active
     updateTransition(time);
 
     gl.uniform1f(timeLoc, time * 0.001);
     gl.uniform2f(resLoc, canvas.width, canvas.height);
     gl.uniform2f(mouseLoc, mouseX, mouseY);
-    gl.uniform1f(radiusLoc, hoverRadius); // Update hover radius
-    gl.uniform4fv(colour1Loc, colour1); // Update base color 1
-    gl.uniform4fv(colour2Loc, colour2); // Update base color 2
-    gl.uniform4fv(colour3Loc, colour3); // Update base color 3
-    gl.uniform1f(spinSpeedLoc, spinSpeed); // Update spin speed
-    gl.uniform1f(lightingLoc, lighting); // Update lighting
+    gl.uniform1f(radiusLoc, hoverRadius);
+    gl.uniform4fv(colour1Loc, colour1);
+    gl.uniform4fv(colour2Loc, colour2);
+    gl.uniform4fv(colour3Loc, colour3);
+    gl.uniform1f(spinSpeedLoc, spinSpeed);
+    gl.uniform1f(lightingLoc, lighting);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
     requestAnimationFrame(render);
   }
@@ -334,57 +159,3 @@ function compileShader(type, source) {
 }
 
 init();
-
-document.addEventListener('DOMContentLoaded', () => {
-  const toggleButton = document.getElementById('toggle-controls');
-  const controls = document.querySelector('.controls');
-
-  let controlsVisible = false;
-
-  toggleButton.addEventListener('click', () => {
-    controlsVisible = !controlsVisible;
-    toggleControlsVisibility();
-  });
-
-  // Add event listener for spacebar to toggle controls
-  document.addEventListener('keydown', (event) => {
-    if (event.key === ' ') {
-      event.preventDefault(); // Prevent default spacebar scrolling behavior
-      controlsVisible = !controlsVisible;
-      toggleControlsVisibility();
-    }
-  });
-
-  function toggleControlsVisibility() {
-    if (controlsVisible) {
-      controls.style.display = 'block';
-      toggleButton.textContent = 'Hide Controls';
-    } else {
-      controls.style.display = 'none';
-      toggleButton.textContent = 'Show Controls';
-    }
-  }
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const controls = document.querySelector('.controls'); // Select the controls element
-
-  let controlsVisible = false; // Track visibility state
-
-  // Add event listener for spacebar to toggle controls
-  document.addEventListener('keydown', (event) => {
-    if (event.key === ' ') {
-      event.preventDefault(); // Prevent default spacebar scrolling behavior
-      controlsVisible = !controlsVisible; // Toggle visibility state
-      toggleControlsVisibility();
-    }
-  });
-
-  function toggleControlsVisibility() {
-    if (controlsVisible) {
-      controls.style.display = 'block'; // Show controls
-    } else {
-      controls.style.display = 'none'; // Hide controls
-    }
-  }
-});

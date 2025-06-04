@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portafolio</title>
+  <title>Portafolio - Jorge Palacios</title>
   <link rel="stylesheet" href="stylesheet.css" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
@@ -19,39 +19,190 @@
     <canvas id="webgl-canvas"></canvas>
   </div>
 
-  <!-- Controls -->
-  <div class="controls" style="display: none;">
-    <label for="colour1R">Base Color 1 (R):</label>
-    <input type="range" id="colour1R" min="0.0" max="1.0" step="0.01" value="0.6">
-    <label for="colour1G">Base Color 1 (G):</label>
-    <input type="range" id="colour1G" min="0.0" max="1.0" step="0.01" value="0.6">
-    <label for="colour1B">Base Color 1 (B):</label>
-    <input type="range" id="colour1B" min="0.0" max="1.0" step="0.01" value="0.8">
-
-    <label for="spinSpeed">Spin Speed:</label>
-    <input type="range" id="spinSpeed" min="0.0" max="10.0" step="0.1" value="4.0">
-
-    <label for="lighting">Lighting:</label>
-    <input type="range" id="lighting" min="0.0" max="2.0" step="0.1" value="1.0">
-
-    <label for="hoverRadius">Hover Radius:</label>
-    <input type="range" id="hoverRadius" min="0.0" max="1.0" step="0.01" value="0.15">
+  <!-- Navigation Progress -->
+  <div id="navigation-progress">
+    <div id="progress-bar"></div>
   </div>
 
-  <!-- Carousel -->
-  <div id="carousel-wrapper">
-    <div id="menu">
-      <div id="current-option">
-        <span id="current-option-text1" data-previous-text="" data-next-text=""></span>
-        <div id="current-option-text3" class="hidden"></div> <!-- Text 3 above Text 2 -->
-        <span id="current-option-text2" data-previous-text="" data-next-text=""></span>
+  <!-- Navigation Dots -->
+  <div id="navigation-dots">
+    <div class="dot active" data-section="about"></div>
+    <div class="dot" data-section="pochita"></div>
+    <div class="dot" data-section="api"></div>
+    <div class="dot" data-section="music"></div>
+    <div class="dot" data-section="skills"></div>
+    <div class="dot" data-section="contact"></div>
+  </div>
+
+  <!-- Sections Container -->
+  <div id="sections-container">
+    <!-- About Section -->
+    <section id="about" class="section active">
+      <div class="content-card">
+        <div class="text-content">
+          <h1>¿Quien soy?</h1>
+          <p>Me llamo Jorge Palacios, soy un estudiante de tercer año de Computer Science en la Universidad del Valle de Guatemala. Como developer Junior me apasiona la programación y el desarrollo web. En mi tiempo libre disfruto aprender nuevas tecnologías y trabajar en proyectos personales.</p>
+          <div class="contact-links">
+            <a href="https://www.instagram.com/pala_sales/" target="_blank">
+              <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://github.com/Palasuwu" target="_blank">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="/cv.pdf" download>
+              <i class="fas fa-download"></i> Descargar CV
+            </a>
+          </div>
+        </div>
+        <div class="image-content">
+          <img src="assets/me.jpeg" alt="Jorge Palacios">
+        </div>
       </div>
-      <button id="previous-option"></button>
-      <button id="next-option"></button>
-    </div>
-    <div id="image"></div>
+    </section>
+
+    <!-- Pochita Project -->
+    <section id="pochita" class="section">
+      <div class="content-card">
+        <div class="text-content">
+          <h1>Pochita con CSS y HTML</h1>
+          <p>Un proyecto creativo que recrea visualmente al personaje Pochita utilizando unicamente HTML y CSS avanzado. Demuestra cómo es posible lograr ilustraciones, animaciones y diseños detallados solo con CSS.</p>
+          <a href="https://github.com/Palasuwu/LA4Css" target="_blank" class="project-link">
+            <i class="fab fa-github"></i> Ver en GitHub
+          </a>
+          <div class="tech-tags">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>Animaciones</span>
+          </div>
+        </div>
+        <div class="image-content">
+          <div class="pochita">
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+            <div class="mouth"></div>
+            <div class="mouth2"></div>
+            <div class="foot left"></div>
+            <div class="foot right"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- API Project -->
+    <section id="api" class="section">
+      <div class="content-card">
+        <div class="text-content">
+          <h1>API con PostgreSQL</h1>
+          <p>API para gestionar tickets de incidentes de dispositivos en un entorno laboral, conectada a PostgreSQL. Incluye métodos GET, POST, PUT y DELETE para consultar, crear, actualizar y eliminar incidentes.</p>
+          <a href="https://github.com/Palasuwu/ejercicio-API" target="_blank" class="project-link">
+            <i class="fab fa-github"></i> Ver en GitHub
+          </a>
+          <div class="tech-tags">
+            <span>Python</span>
+            <span>Flask</span>
+            <span>PostgreSQL</span>
+            <span>REST API</span>
+          </div>
+        </div>
+        <div class="image-content">
+          <img src="assets/API.png" alt="API Project">
+        </div>
+      </div>
+    </section>
+
+    <!-- Music Recommendations -->
+    <section id="music" class="section">
+      <div class="content-card">
+        <div class="text-content">
+          <h1>Recomendaciones de Música</h1>
+          <p>Para este proyecto se utilizó el API de Spotify para obtener recomendaciones de música basadas en un árbol binario. El Árbol Y base de Datos fue implementado usando Neo4j, una plataforma de base de datos gráficos.</p>
+          <a href="https://github.com/Charly2440/Recomendation-Engine-Proyecto-2" target="_blank" class="project-link">
+            <i class="fab fa-github"></i> Ver en GitHub
+          </a>
+          <div class="tech-tags">
+            <span>Python</span>
+            <span>Spotify API</span>
+            <span>Neo4j</span>
+            <span>Árboles Binarios</span>
+          </div>
+        </div>
+        <div class="image-content">
+          <img src="assets/spot.png" alt="Music Recommendations">
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+      <div class="content-card">
+        <div class="text-content">
+          <h1>Mis Habilidades</h1>
+          <p>Entre en lo que más domino son HTML, CSS Y JavaScript para creación de frontends, también tengo experiencia en base de datos relacionales como SQL y la integración de las mismas para crear API's.</p>
+          <div class="skills-chart">
+            <div id="language-chart">
+              <div id="language-chart-title">Lenguajes Más Utilizados</div>
+              <div id="language-bar"></div>
+              <div class="language-guide">
+                <div class="language-guide-item">
+                  <div class="language-color-box" style="background-color: #d97706;"></div> Java - 43.09%
+                </div>
+                <div class="language-guide-item">
+                  <div class="language-color-box" style="background-color: #facc15;"></div> JavaScript - 18.47%
+                </div>
+                <div class="language-guide-item">
+                  <div class="language-color-box" style="background-color: #a855f7;"></div> CSS - 14.23%
+                </div>
+                <div class="language-guide-item">
+                  <div class="language-color-box" style="background-color: #3b82f6;"></div> Python - 11.26%
+                </div>
+                <div class="language-guide-item">
+                  <div class="language-color-box" style="background-color: #ef4444;"></div> HTML - 7.55%
+                </div>
+                <div class="language-guide-item">
+                  <div class="language-color-box" style="background-color: #9333ea;"></div> Kotlin - 5.39%
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <div class="content-card">
+        <div class="text-content">
+          <h1>¿Interesado en mi trabajo?</h1>
+          <p>Si te gusta lo que ves y quieres trabajar conmigo, contáctame a través de cualquiera de estos canales:</p>
+          
+          <div class="contact-methods">
+            <div class="contact-method">
+              <i class="fas fa-envelope"></i>
+              <span>palasales02@gmail.com</span>
+            </div>
+            <div class="contact-method">
+              <i class="fab fa-linkedin"></i>
+              <span>linkedin.com/in/jorge-palacios</span>
+            </div>
+            <div class="contact-method">
+              <i class="fab fa-github"></i>
+              <span>github.com/Palasuwu</span>
+            </div>
+          </div>
+          
+          <div class="cv-download">
+            <a href="/cv.pdf" download class="cv-button">
+              <i class="fas fa-download"></i> Descargar CV Completo
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
+  <!-- Font Awesome for Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  
   <!-- Scripts -->
   <script type="module" src="main.js"></script>
   <script src="carousel.js"></script>

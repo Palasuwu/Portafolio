@@ -1,403 +1,272 @@
+/* Updated stylesheet.css */
 html, body {
     margin: 0;
     padding: 0;
-    overflow: hidden ; /* Prevent scrolling */
+    overflow: hidden;
     background: black;
-    height: 100%; /* Ensure the body spans the full height */
-}
-
-/* Ensure the shader container spans the full screen */
-.shader-container {
-    position: fixed; /* Covers the entire screen */
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Shader container */
+  .shader-container {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; /* Keep it behind other elements */
-    overflow: hidden; /* Prevent overflow */
-}
-
-canvas {
-    display: block; /* Remove inline spacing */
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    
-}
-
-
-.controls {
-    position: absolute;
-    display: none; /* Hidden by default */
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    border-radius: 8px;
-    color: white;
-    font-family: Arial, sans-serif;
-    max-width: 400px;
-    box-shadow: 0 4px 8px rgb(255, 255, 255);
-    z-index: 102;
-}
-
-
-.controls input[type="range"] {
+    z-index: 0;
+    overflow: hidden;
+  }
+  
+  canvas {
+    display: block;
     width: 100%;
-}
-
-/* Center the carousel in the middle of the shader */
-#carousel-wrapper {
-    position: absolute; /* Position it on top of the shader */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Adjust for centering */
-    z-index: 5; /* Ensure it appears above the shader */
+    height: 100%;
+  }
+  
+  /* Sections container */
+  #sections-container {
+    position: relative;
+    z-index: 10;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
+  
+  .section {
+    height: 100vh;
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: center;
-    width: auto;
-    height: auto;
-    overflow: hidden;
-}
-
-#menu {
-    height: 750px;
-    width: 850px;
-    overflow: hidden;
-    font-weight: 700;
-    line-height: 1;
-    display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    vertical-align: middle;
-    transition: all 0.8s ease-in-out;
-
-    /* Glass-like background */
-    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
-    backdrop-filter: blur(15px); /* Blur effect for the glass look */
-    -webkit-backdrop-filter: blur(15px); /* Safari support */
-    border-radius: 15px; /* Rounded corners */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Optional border for definition */
-}
-
-#current-option {
-    position: sticky;
-    width: 80%;
-    height: 80%;
-    transform: translate(-25%, -25%);
+    scroll-snap-align: start;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .content-card {
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
+    max-width: 1200px;
+    width: 90%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .text-content {
+    flex: 1;
+    padding-right: 40px;
+    color: white;
+  }
+  
+  .text-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(80, 246, 255, 0.7);
+  }
+  
+  .text-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+  
+  .image-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: 10px;
-}
-
-#current-option-text1 {
-    font-size: 2.2rem;
-    line-height: 3rem;
-    width: 220px;
-    text-shadow:  0px 0px 10px rgba(252, 252, 252, 0.572); /* Neon effect */
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    margin-bottom: 9px; /* Add spacing below text1 */
-    cursor: pointer; /* Change cursor to pointer to indicate interactivity */
-    z-index: 1005;
-}
-
-
-#current-option-text1:hover {
-    text-decoration: underline; /* Optional: Add underline on hover */
-    cursor : pointer; /* Ensure cursor is a pointer on hover */
-    
-}
-#current-option-text3 {
-    font-size: 1.2rem;
-    width: 220px;
-    height: auto;
+  }
+  
+  .image-content img {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Navigation Dots */
+  #navigation-dots {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    margin-bottom: 10px; /* Add spacing below text3 */
-    opacity: 0; /* Start with hidden state */
-    transform: translateY(-8px); /* Slightly move up when hidden */
-    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for opacity and position */
-    text-shadow:  0px 0px 10px rgba(80, 246, 255, 0.586); /* Neon effect */
-}
-#current-option-text2 {
-    font-size: 1.4rem;
-    width: 220px;
-    height: auto;
-    display: flex;
-    position : fixed;
-    bottom: 0px;
-    flex-direction: column;
-    align-items: flex-start;
-    z-index: 2005;
-    
-}
-
-#current-option-text3.expanded {
-    display: flex; /* Ensure it is visible */
-    opacity: 4; /* Fade in */
-    transform: translateY(70px); /* Move to original position */
-}
-
-#current-option-text3.hidden {
-    display: flex; /* Keep it in the layout but invisible */
-    opacity: 0; /* Fade out */
-    transform: translateY(-10px); /* Move slightly up */
-
-}
-
-#image {
-    height: 250px;
-    width: 240px;
-    border: 2px solid black; /* Black border */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: 101;
-    position: absolute;
-    transform: translate(140px, 0);
-}
-
-#image:hover {
-    animation: resize 0.8s ease-in-out forwards; /* Increased duration for smoother animation */
-    box-shadow: 0 0 10px rgba(80, 246, 255, 0.586); /* Subtle shadow on hover */
-}
-
-/* Apply the pulsating animation to links on hover */
-a:hover {
-    animation: pulsate 1s ease-in-out infinite; /* Smooth pulsating effect */
-    text-decoration: underline; /* Optional: Add underline on hover */
-}
-
-a{
-    text-shadow:  0px 0px 10px rgba(208, 80, 255, 0.586); /* Neon effect */
-    color: #000000;
-    text-decoration: none; /* Remove underline */
-    transition: color 0.3s ease; /* Smooth color transition */
-}
-
-/* No se usan ya pero si los borro peta la pagina y ya no quiero tocar los arrays pipipip :( */
-#previous-option,
-#next-option {
-    width: 1.5rem;
-    height: 1.5rem;
-    border: none;
-    display: none;
+    gap: 15px;
+  }
+  
+  .dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
     cursor: pointer;
-    background-size: cover;
-    position: absolute;
-}
-
-#previous-option {
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpolygon points='225.813,48.907 128,146.72 30.187,48.907 0,79.093 128,207.093 256,79.093' fill='%23333'/%3E%3C/svg%3E");
-    transform: translate(310px, 50px);
-}
-
-#next-option {
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpolygon points='225.813,48.907 128,146.72 30.187,48.907 0,79.093 128,207.093 256,79.093' fill='%23333'/%3E%3C/svg%3E");
-    transform: translate(310px, -50px) rotate(180deg);
-}
-#previous-option:hover,
-#next-option:hover {
-    box-shadow: 0 0 4px rgba(80, 246, 255, 0.586); /* Subtle shadow on hover */
-}
-
-
-/* Define the animation with 8 keyframes */
-@keyframes resize {
-    0% {
-        transform: translate(140px, 0) scale(0.9);
+    transition: all 0.3s ease;
+  }
+  
+  .dot.active {
+    background: rgba(80, 246, 255, 0.8);
+    transform: scale(1.3);
+    box-shadow: 0 0 10px rgba(80, 246, 255, 0.7);
+  }
+  
+  /* Navigation Progress */
+  #navigation-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 100;
+  }
+  
+  #progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #50f6ff, #9333ea);
+    transition: width 0.3s ease;
+  }
+  
+  /* Project links */
+  .project-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background: rgba(80, 246, 255, 0.2);
+    border-radius: 30px;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .project-link:hover {
+    background: rgba(80, 246, 255, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(80, 246, 255, 0.3);
+  }
+  
+  /* Tech tags */
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .tech-tags span {
+    background: rgba(80, 246, 255, 0.2);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+  
+  /* Contact section styles */
+  .contact-methods {
+    margin: 30px 0;
+  }
+  
+  .contact-method {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+  }
+  
+  .contact-method i {
+    margin-right: 15px;
+    font-size: 1.5rem;
+    color: #50f6ff;
+  }
+  
+  .cv-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, #50f6ff, #9333ea);
+    border-radius: 30px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .cv-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(147, 51, 234, 0.4);
+  }
+  
+  /* Pochita animation positioning */
+  #pochita .image-content {
+    justify-content: flex-end;
+  }
+  
+  /* Skills chart adjustments */
+  .skills-chart {
+    margin-top: 30px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 992px) {
+    .content-card {
+      flex-direction: column;
+      text-align: center;
     }
-    12.5% {
-        transform: translate(140px, 0) scale(0.85);
-    }
-    25% {
-        transform: translate(140px, 0) scale(0.9);
-    }
-    37.5% {
-        transform: translate(140px, 0) scale(0.95);
-    }
-    50% {
-        transform: translate(140px, 0) scale(1.0);
-    }
-    62.5% {
-        transform: translate(140px, 0) scale(1.05);
-    }
-    75% {
-        transform: translate(140px, 0) scale(1.07);
-    }
-    100% {
-        transform: translate(140px, 0) scale(1.0);
-    }
-
-   
-}
-
-/* Define the pulsating animation with more keyframes */
-@keyframes pulsate {
-    0% {
-        transform: scale(1); /* Normal size */
-        color: #000000; /* Default color */
-        text-shadow: 0px 0px 5px rgba(208, 80, 255, 0.3); /* Subtle glow */
-    }
-    20% {
-        transform: scale(1.05); /* Slightly larger */
-        color: #1e90ff; /* Brighter color */
-        text-shadow: 0px 0px 10px rgba(208, 80, 255, 0.5); /* Stronger glow */
-    }
-    40% {
-        transform: scale(1.1); /* Larger */
-        color: #00bfff; /* Even brighter color */
-        text-shadow: 0px 0px 15px rgba(208, 80, 255, 0.7); /* Intense glow */
-    }
-    60% {
-        transform: scale(1.05); /* Slightly smaller */
-        color: #1e90ff; /* Return to previous color */
-        text-shadow: 0px 0px 10px rgba(208, 80, 255, 0.5); /* Stronger glow */
-    }
-    80% {
-        transform: scale(1.02); /* Slightly smaller */
-        color: #000000; /* Return to default color */
-        text-shadow: 0px 0px 5px rgba(208, 80, 255, 0.3); /* Subtle glow */
-    }
-    100% {
-        transform: scale(1); /* Normal size */
-        color: #000000; /* Default color */
-        text-shadow: 0px 0px 5px rgba(208, 80, 255, 0.3); /* Subtle glow */
-    }
-}
-
-
-@media (max-width: 768px) {
-    #carousel-wrapper {
-        top: 55%;
-        padding: 1rem;
-    }
-
-    #menu {
-        flex-direction: column;
-        width: 90vw;
-        max-width: 95%;
-        padding: 1rem;
-        gap: 1rem;
-    }
-
-    #current-option {
-        max-width: 100%;
-        align-items: center;
-    }
-
-    #current-option-text1,
-    #current-option-text2,
-    #current-option-text3 {
-        align-items: center;
-        max-width: 80%;
-        text-align: left;
-        
-    }
-
-    #image {
-        width: 80vw;
-        max-width: 240px;
-        margin: 0 auto;
-    }
-
     
+    .text-content {
+      padding-right: 0;
+      margin-bottom: 30px;
+    }
     
-    #next-option {
-        bottom: 1px;
-        right: 1vh;
-        transform: rotate(-90deg);
+    .tech-tags {
+      justify-content: center;
     }
-
-    #previous-option {
-        bottom: 1px;
-        left: 1vh;
-        transform: rotate(90deg);
+    
+    #navigation-dots {
+      right: 15px;
     }
-
-    .top-bar {
-        flex-direction: column;
-        font-size: 1rem;
-        gap: 5px;
-    }
-
-    #image {
-        scale: 1.0;
-        width: 30%;
-        height: 40%;
-        margin: 0 auto;
-    }
-
-#current-option-text1 {
-        font-size: 1.2rem;
-        line-height: 2rem;
-        width: 100%;
-    }
-
-    #current-option-text2 {
-        font-size: 0.9rem;
-        width: 100%;
-    }
-
-    #current-option-text3 {
-        font-size: 0.8rem;
-        width: 100%;
-    }
-
-}
-
-
-/* Default styles for the button container */
-#index-button-container {
-  display: flex;
-  flex-wrap: wrap; /* Allow wrapping for smaller screens */
-  justify-content: center;
-  gap: 20px;
-  padding: 10px;
-  max-width: 100%; /* Ensure it doesn't overflow horizontally */
-  overflow-x: auto; /* Allow horizontal scrolling if needed */
-  position: absolute; /* Position it relative to the parent container */
-  bottom: 50px; /* Move the container up by 50px */
-  white-space: nowrap; /* Prevent text wrapping inside buttons */
-  z-index: 1000; /* Ensure it appears above other elements */
-}
-
-/* Responsive styles for smaller screens */
-@media (max-width: 768px) {
-  #index-button-container {
-    gap: 10px; /* Reduce spacing between buttons */
-    bottom: 70px; /* Move it further up for smaller screens */
   }
-
-  #index-button-container span {
-    font-size: 0.9rem; /* Reduce font size */
+  
+  @media (max-width: 768px) {
+    .content-card {
+      padding: 25px;
+    }
+    
+    .text-content h1 {
+      font-size: 2rem;
+    }
+    
+    #navigation-dots {
+      display: none;
+    }
+    
+    .contact-method {
+      font-size: 1rem;
+    }
   }
-}
-
-@media (max-width: 480px) {
-  #index-button-container {
-    flex-wrap: nowrap; /* Prevent wrapping */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    justify-content: flex-start; /* Align buttons to the left */
-    top: 9px; /* Move it even further up for very small screens */
-    max-width: 100%; /* Ensure it fits within the viewport */
+  
+  @media (max-width: 480px) {
+    .content-card {
+      width: 95%;
+      padding: 20px;
+    }
+    
+    .text-content h1 {
+      font-size: 1.8rem;
+    }
+    
+    .text-content p {
+      font-size: 1rem;
+    }
+    
+    .project-link {
+      font-size: 0.9rem;
+    }
   }
-
-  #index-button-container span {
-    font-size: 0.8rem; /* Further reduce font size */
-    text-align: center; /* Center-align text */
-  }
-}
