@@ -101,6 +101,7 @@ canvas {
     font-size: 2.2rem;
     line-height: 3rem;
     width: 220px;
+    text-shadow:  0px 0px 10px rgba(252, 252, 252, 0.572); /* Neon effect */
     height: auto;
     display: flex;
     flex-direction: row;
