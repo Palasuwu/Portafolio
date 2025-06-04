@@ -1,0 +1,75 @@
+/* Container for the chart */
+#language-chart {
+    width: 100%;
+    max-width: 600px; /* Increase max width */
+    background-color: #1e293b; /* Dark background */
+    border-radius: 15px; /* Slightly larger border radius */
+    padding: 30px; /* Increase padding */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+    color: white;
+    font-family: Arial, sans-serif;
+    position: fixed;
+    overflow: hidden;
+    transform: translateX(-40px); /* Move the component 20px to the left */
+    transform : translateY(-20px); /* Adjust vertical position */
+    border : 2px solid #38bdf8; /* Light blue border */
+}
+
+/* Title */
+#language-chart-title {
+    font-size: 2rem; /* Increase font size */
+    font-weight: bold;
+    margin-bottom: 30px; /* Add more spacing below the title */
+    text-align: center;
+    color: #38bdf8; /* Light blue */
+}
+
+/* Single horizontal bar */
+#language-bar {
+    width: 0; /* Start empty */
+    height: 30px; /* Increase height */
+    border-radius: 15px; /* Larger border radius */
+    background: linear-gradient(to right, 
+        #d97706 43%, /* Java */
+        #facc15 61%, /* JavaScript (43% + 18%) */
+        #a855f7 75%, /* CSS (61% + 14%) */
+        #3b82f6 86%, /* Python (75% + 11%) */
+        #ef4444 93%, /* HTML (86% + 7%) */
+        #9333ea 100% /* Kotlin (93% + 5%) */
+    ); /* Gradient representing languages */
+    animation: fillBar 2s ease-in-out forwards; /* Smooth fill effect */
+}
+
+/* Animation for filling the bar */
+@keyframes fillBar {
+    from {
+        width: 0; /* Start empty */
+    }
+    to {
+        width: 100%; /* Fill the entire width */
+    }
+}
+
+/* Language guide */
+.language-guide {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px; /* Add more spacing above the guide */
+    gap: 15px; /* Increase spacing between guide items */
+
+}
+
+/* Guide item */
+.language-guide-item {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Increase spacing between color box and text */
+    font-size: 1.2rem; /* Increase font size */
+}
+
+/* Guide color box */
+.language-color-box {
+    width: 20px; /* Increase size */
+    height: 20px; /* Increase size */
+    border-radius: 5px; /* Slightly larger border radius */
+}

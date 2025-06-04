@@ -13,8 +13,7 @@ const text2_options = [
   { text: "Repo del API Incidentes ", url: "https://github.com/Palasuwu/ejercicio-API?tab=readme-ov-file" },
   { text: "Repo del Proyecto ", url: "https://github.com/Charly2440/Recomendation-Engine-Proyecto-2?tab=readme-ov-file" },
   {text: "Stats de Github ",url: " https://github.com/Palasuwu/Palasuwu/tree/main"},
-  {text:"CV",url:"Portafolio/cv.pdf"}
-
+  {text:"CV",url:"/cv.pdf"}
 ];
 const text3_options = [
   "Me llamo Jorge Palacios , soy un estudiante de tercer año de Computer Science en la Universidad del Valle de Guatemala . Como devoloper Junior me apasiona la programación y el desarrollo web . En mi tiempo libre disfruto aprender nuevas tecnologías y trabajar en proyectos personales.",
@@ -29,9 +28,8 @@ const image_options = [
   null, // Card 2 will use the Pochita animation instead of an image
   "assets/API.png",
   "assets/spot.png",
-  "assets/stats.png",
-  "assets/cv1.png" 
-
+  null,
+  "assets/cv1.png"
 ];
 let i = 0;
 
@@ -39,8 +37,6 @@ const currentOptionText1 = document.getElementById("current-option-text1");
 const currentOptionText2 = document.getElementById("current-option-text2");
 const currentOptionText3 = document.getElementById("current-option-text3");
 const currentOptionImage = document.getElementById("image");
-const optionPrevious = document.getElementById("previous-option");
-const optionNext = document.getElementById("next-option");
 
 // Function to update the carousel content
 function updateCarousel() {
@@ -72,9 +68,39 @@ function updateCarousel() {
     `;
     currentOptionImage.style.backgroundImage = ""; // Clear background image
     currentOptionImage.style.display = "flex"; // Center the Pochita animation
+  } else if (i === 4) { // Updated condition for Card 5
+    console.log("Injecting programming language chart for Card 5");
+    currentOptionImage.innerHTML = `
+      <div id="language-chart">
+        <div id="language-chart-title">Most Used Languages</div>
+        <div id="language-bar"></div>
+        <div class="language-guide">
+          <div class="language-guide-item">
+            <div class="language-color-box" style="background-color: #d97706;"></div> Java - 43.09%
+          </div>
+          <div class="language-guide-item">
+            <div class="language-color-box" style="background-color: #facc15;"></div> JavaScript - 18.47%
+          </div>
+          <div class="language-guide-item">
+            <div class="language-color-box" style="background-color: #a855f7;"></div> CSS - 14.23%
+          </div>
+          <div class="language-guide-item">
+            <div class="language-color-box" style="background-color: #3b82f6;"></div> Python - 11.26%
+          </div>
+          <div class="language-guide-item">
+            <div class="language-color-box" style="background-color: #ef4444;"></div> HTML - 7.55%
+          </div>
+          <div class="language-guide-item">
+            <div class="language-color-box" style="background-color: #9333ea;"></div> Kotlin - 5.39%
+          </div>
+        </div>
+      </div>
+    `;
+    currentOptionImage.style.backgroundImage = ""; // Clear background image
+    currentOptionImage.style.display = "block"; // Ensure the chart is displayed
   } else {
     console.log("Using background image for other cards");
-    currentOptionImage.innerHTML = ""; // Clear Pochita animation
+    currentOptionImage.innerHTML = ""; // Clear custom content
     currentOptionImage.style.backgroundImage = image_options[i]
       ? `url(${image_options[i]})`
       : ""; // Set background image if available
@@ -84,7 +110,6 @@ function updateCarousel() {
 
 // Initialize carousel content
 updateCarousel();
-
 
 // Handle card click to toggle detailed description
 currentOptionText1.onclick = function () {
