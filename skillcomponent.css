@@ -56,7 +56,6 @@
     flex-wrap: wrap;
     margin-top: 30px; /* Add more spacing above the guide */
     gap: 15px; /* Increase spacing between guide items */
-
 }
 
 /* Guide item */
@@ -73,3 +72,37 @@
     height: 20px; /* Increase size */
     border-radius: 5px; /* Slightly larger border radius */
 }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #language-chart {
+        max-width: 90%; /* Reduce max width */
+        padding: 20px; /* Reduce padding */
+        transform: translateX(-20px); /* Adjust horizontal position */
+        transform: translateY(0); /* Center vertically */
+    }
+
+    #language-chart-title {
+        font-size: 1.5rem; /* Reduce font size */
+        margin-bottom: 20px; /* Reduce spacing below the title */
+    }
+
+    #language-bar {
+        height: 20px; /* Reduce bar height */
+        border-radius: 10px; /* Adjust border radius */
+    }
+
+    .language-guide {
+        gap: 10px; /* Reduce spacing between guide items */
+    }
+
+    .language-guide-item {
+        font-size: 1rem; /* Reduce font size */
+    }
+
+    .language-color-box {
+        width: 15px; /* Reduce size */
+        height: 15px; /* Reduce size */
+    }
+}
+

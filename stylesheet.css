@@ -106,10 +106,11 @@ canvas {
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
-    margin-bottom: 10px; /* Add spacing below text1 */
+    margin-bottom: 9px; /* Add spacing below text1 */
     cursor: pointer; /* Change cursor to pointer to indicate interactivity */
     z-index: 1005;
 }
+
 
 #current-option-text1:hover {
     text-decoration: underline; /* Optional: Add underline on hover */
@@ -117,7 +118,7 @@ canvas {
     
 }
 #current-option-text3 {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     width: 220px;
     height: auto;
     display: flex;
@@ -126,12 +127,12 @@ canvas {
     justify-content: flex-start;
     margin-bottom: 10px; /* Add spacing below text3 */
     opacity: 0; /* Start with hidden state */
-    transform: translateY(-10px); /* Slightly move up when hidden */
+    transform: translateY(-8px); /* Slightly move up when hidden */
     transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for opacity and position */
     text-shadow:  0px 0px 10px rgba(80, 246, 255, 0.586); /* Neon effect */
 }
 #current-option-text2 {
-    font-size: 0.8rem;
+    font-size: 1.4rem;
     width: 220px;
     height: auto;
     display: flex;
@@ -146,7 +147,7 @@ canvas {
 #current-option-text3.expanded {
     display: flex; /* Ensure it is visible */
     opacity: 4; /* Fade in */
-    transform: translateY(80px); /* Move to original position */
+    transform: translateY(70px); /* Move to original position */
 }
 
 #current-option-text3.hidden {
