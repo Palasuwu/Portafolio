@@ -7,7 +7,7 @@
     padding: 30px; /* Default padding */
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Stronger shadow */
     color: white;
-    font-family: Arial, sans-serif;
+    font-family: 'Pixelify Sans', sans-serif; /* Use the same font */
     position: fixed;
     overflow: hidden;
     transform: translateX(-40px); /* Default horizontal position */
@@ -29,15 +29,17 @@
     width: 0; /* Start empty */
     height: 30px; /* Default height */
     border-radius: 15px; /* Larger border radius */
-    background: linear-gradient(to right, 
-        #d97706 43%, /* Java */
-        #facc15 61%, /* JavaScript (43% + 18%) */
-        #a855f7 75%, /* CSS (61% + 14%) */
-        #3b82f6 86%, /* Python (75% + 11%) */
-        #ef4444 93%, /* HTML (86% + 7%) */
-        #9333ea 100% /* Kotlin (93% + 5%) */
-    ); /* Gradient representing languages */
+    background: linear-gradient(
+        to right,
+        #d97706, /* Java */
+        #facc15, /* JavaScript */
+        #a855f7, /* CSS */
+        #3b82f6, /* Python */
+        #ef4444, /* HTML */
+        #9333ea /* Kotlin */
+    ); /* Smooth gradient */
     animation: fillBar 2s ease-in-out forwards; /* Smooth fill effect */
+    image-rendering: pixelated; /* Apply pixelated effect */
 }
 
 /* Animation for filling the bar */
@@ -64,6 +66,7 @@
     align-items: center;
     gap: 10px; /* Default spacing between color box and text */
     font-size: 1.2rem; /* Default font size */
+    font-family: 'Pixelify Sans', sans-serif; /* Use the same font */
 }
 
 /* Guide color box */

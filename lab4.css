@@ -1,24 +1,4 @@
-h4{
-    position: relative;
-    width: max-content;
-    bottom: 100px;
-    left: -60px;
-}
-h4::after{
-    
-    content: ' ';
-    background: linear-gradient(to right, red , blue);
-    height: 2px;
-    width: 100%;
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    transition: 100ms;
-}
-h4:hover::after{
 
-    width: 0% ;
-}
 /* Cuerpo */
 .pochita {
     width: 100px;

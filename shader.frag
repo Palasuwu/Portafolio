@@ -17,7 +17,7 @@ uniform float LIGHTING;
 #define HOVER_COLOUR_1 vec4(0.9, 0.4, 0.6, 1.0)
 #define HOVER_COLOUR_2 vec4(0.2, 0.7, 0.9, 1.0)
 #define HOVER_COLOUR_3 vec4(0.1, 0.0, 0.2, 1.0)
-#define HOVER_SPIN_SPEED 20.0
+#define HOVER_SPIN_SPEED 1.0
 #define HOVER_LIGHTING 0.9
 
 // === ⚙️ Constantes generales ===

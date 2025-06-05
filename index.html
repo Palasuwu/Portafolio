@@ -11,6 +11,11 @@
   <link rel="manifest" href="assets/site.webmanifest">
   <link rel="stylesheet" href="lab4.css" />
   <link rel="stylesheet" href="skillcomponent.css">
+  
+  <!-- Font for all text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -42,15 +47,13 @@
         <div class="text-content">
           <h1>¿Quien soy?</h1>
           <p>Me llamo Jorge Palacios, soy un estudiante de tercer año de Computer Science en la Universidad del Valle de Guatemala. Como developer Junior me apasiona la programación y el desarrollo web. En mi tiempo libre disfruto aprender nuevas tecnologías y trabajar en proyectos personales.</p>
-          <div class="contact-links">
-            <a href="https://www.instagram.com/pala_sales/" target="_blank">
-              <i class="fab fa-instagram"></i> Instagram
+          <p>Además, tengo habilidades en comunicación efectiva y trabajo en equipo, lo que me permite colaborar en proyectos de manera eficiente. Hablo dos idiomas: inglés y español, lo que me facilita interactuar con equipos internacionales y acceder a recursos en ambos idiomas.</p>
+          <div class="social-links">
+            <a href="https://www.instagram.com/pala_sales/" target="_blank" class="social-icon">
+              <img src="assets/instagram-svgrepo-com.svg" alt="Instagram">
             </a>
-            <a href="https://github.com/Palasuwu" target="_blank">
-              <i class="fab fa-github"></i> GitHub
-            </a>
-            <a href="/cv.pdf" download>
-              <i class="fas fa-download"></i> Descargar CV
+            <a href="https://github.com/Palasuwu/" target="_blank" class="social-icon">
+              <img src="assets/github-svgrepo-com.svg" alt="GitHub">
             </a>
           </div>
         </div>
@@ -65,7 +68,8 @@
       <div class="content-card">
         <div class="text-content">
           <h1>Pochita con CSS y HTML</h1>
-          <p>Un proyecto creativo que recrea visualmente al personaje Pochita utilizando unicamente HTML y CSS avanzado. Demuestra cómo es posible lograr ilustraciones, animaciones y diseños detallados solo con CSS.</p>
+          <p>Un proyecto creativo que recrea visualmente al personaje Pochita utilizando únicamente HTML y CSS avanzado. Demuestra cómo es posible lograr ilustraciones, animaciones y diseños detallados solo con CSS.</p>
+          <p>Este proyecto no solo destaca mi habilidad técnica, sino también mi creatividad y atención al detalle. Fue diseñado para mostrar cómo las herramientas básicas de desarrollo web pueden ser utilizadas para crear arte digital y animaciones interactivas.</p>
           <a href="https://github.com/Palasuwu/LA4Css" target="_blank" class="project-link">
             <i class="fab fa-github"></i> Ver en GitHub
           </a>
@@ -94,6 +98,7 @@
         <div class="text-content">
           <h1>API con PostgreSQL</h1>
           <p>API para gestionar tickets de incidentes de dispositivos en un entorno laboral, conectada a PostgreSQL. Incluye métodos GET, POST, PUT y DELETE para consultar, crear, actualizar y eliminar incidentes.</p>
+          <p>Este proyecto fue desarrollado con un enfoque en la optimización y escalabilidad, asegurando que la API pueda manejar múltiples solicitudes simultáneamente. También incluye validaciones robustas para garantizar la integridad de los datos y una documentación clara para facilitar su uso.</p>
           <a href="https://github.com/Palasuwu/ejercicio-API" target="_blank" class="project-link">
             <i class="fab fa-github"></i> Ver en GitHub
           </a>
@@ -116,6 +121,7 @@
         <div class="text-content">
           <h1>Recomendaciones de Música</h1>
           <p>Para este proyecto se utilizó el API de Spotify para obtener recomendaciones de música basadas en un árbol binario. El Árbol Y base de Datos fue implementado usando Neo4j, una plataforma de base de datos gráficos.</p>
+          <p>El sistema permite a los usuarios descubrir música nueva basada en sus preferencias y patrones de escucha. Este proyecto combina algoritmos avanzados con una interfaz intuitiva, mostrando cómo la tecnología puede mejorar la experiencia musical.</p>
           <a href="https://github.com/Charly2440/Recomendation-Engine-Proyecto-2" target="_blank" class="project-link">
             <i class="fab fa-github"></i> Ver en GitHub
           </a>
@@ -137,7 +143,8 @@
       <div class="content-card">
         <div class="text-content">
           <h1>Mis Habilidades</h1>
-          <p>Entre en lo que más domino son HTML, CSS Y JavaScript para creación de frontends, también tengo experiencia en base de datos relacionales como SQL y la integración de las mismas para crear API's.</p>
+          <p>Entre lo que más domino están HTML, CSS y JavaScript para creación de frontends, también tengo experiencia en bases de datos relacionales como SQL y la integración de las mismas para crear API's.</p>
+          <p>Además, tengo conocimientos en frameworks como Flask y herramientas modernas como Neo4j para bases de datos gráficas. Mi enfoque siempre está en crear soluciones eficientes y escalables que cumplan con las necesidades del cliente.</p>
           <div class="skills-chart">
             <div id="language-chart">
               <div id="language-chart-title">Lenguajes Más Utilizados</div>
@@ -172,29 +179,33 @@
     <section id="contact" class="section">
       <div class="content-card">
         <div class="text-content">
-          <h1>¿Interesado en mi trabajo?</h1>
-          <p>Si te gusta lo que ves y quieres trabajar conmigo, contáctame a través de cualquiera de estos canales:</p>
+          <h1>Contacto</h1>
+          <p>Si deseas ponerte en contacto conmigo, puedes hacerlo a través de mis redes sociales o descargar mi CV completo.</p>
+<p>Estoy abierto a colaborar en proyectos interesantes y desafiantes que me permitan seguir creciendo como desarrollador. No dudes en escribirme para discutir ideas o posibles oportunidades.</p>
           
-          <div class="contact-methods">
-            <div class="contact-method">
-              <i class="fas fa-envelope"></i>
-              <span>palasales02@gmail.com</span>
+          <!-- Language icons -->
+          <div class="language-icons">
+            <div class="language-icon" data-name="Python">
+              <img src="assets/python-127-svgrepo-com.svg" alt="Python">
             </div>
-            <div class="contact-method">
-              <i class="fab fa-linkedin"></i>
-              <span>linkedin.com/in/jorge-palacios</span>
+            <div class="language-icon" data-name="JavaScript">
+              <img src="assets/java-script-svgrepo-com.svg" alt="JavaScript">
             </div>
-            <div class="contact-method">
-              <i class="fab fa-github"></i>
-              <span>github.com/Palasuwu</span>
+            <div class="language-icon" data-name="Java">
+              <img src="assets/java-svgrepo-com (1).svg" alt="Java">
+            </div>
+            <div class="language-icon" data-name="CSS3">
+              <img src="assets/css3-01-svgrepo-com.svg" alt="CSS3">
+            </div>
+            <div class="language-icon" data-name="HTML5">
+              <img src="assets/html5-01-svgrepo-com.svg" alt="HTML5">
+            </div>
+            <div class="language-icon" data-name="Kotlin">
+              <img src="assets/kotlin-svgrepo-com.svg" alt="Kotlin">
             </div>
           </div>
-          
-          <div class="cv-download">
-            <a href="/cv.pdf" download class="cv-button">
-              <i class="fas fa-download"></i> Descargar CV Completo
-            </a>
-          </div>
+
+          <a href="/cv-completo.pdf" download class="cv-button">Descargar CV Completo</a>
         </div>
       </div>
     </section>

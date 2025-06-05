@@ -5,13 +5,14 @@
   justify-content: center;
   align-items: center;
   overflow: hidden; /* Prevent images from overflowing */
+  margin-top: 30px; /* Add spacing between social links and image */
 }
 
 .image-content img {
   max-width: 100%;
   max-height: 70vh;
   border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 1px rgb(0, 0, 0);
   object-fit: cover; /* Ensure images fit within their container */
 }
 
@@ -36,276 +37,365 @@
     width: 100%; /* Ensure the image spans the card width */
     object-fit: contain; /* Prevent cropping */
   }
-}/* Updated stylesheet.css */
+}
+
+/* Updated stylesheet.css */
 html, body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background: black;
-    height: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  /* Shader container */
-  .shader-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    overflow: hidden;
-  }
-  
-  canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-  
-  /* Sections container */
-  #sections-container {
-    position: relative;
-    z-index: 10;
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-  }
-  
-  .section {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    scroll-snap-align: start;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: black;
+  height: 100%;
+  font-family: 'Pixelify Sans', sans-serif;
+  color: #ffffff; /* Default text color */
+  background-color: #1e293b; /* Background color for contrast */
+}
+
+/* Shader container */
+.shader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Sections container */
+#sections-container {
+  position: relative;
+  z-index: 10;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.section {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.content-card {
+  display: flex;
+  width: 90vw;
+  height: 80vh;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.text-content {
+  flex: 1;
+  padding-right: 40px;
+  color: white;
+}
+
+.text-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-shadow: 1px 3px 10px "black";
+}
+
+.text-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.image-content {
+  flex: 1;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-content img {
+  max-width: 100%;
+  max-height: 70vh;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Navigation Dots */
+#navigation-dots {
+  position: fixed;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: rgba(80, 246, 255, 0.8);
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(80, 246, 255, 0.7);
+}
+
+/* Navigation Progress */
+#navigation-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 100;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #50f6ff, #9333ea);
+  transition: width 0.3s ease;
+}
+
+/* Project links */
+.project-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background: rgba(80, 246, 255, 0.2);
+  border-radius: 30px;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.project-link:hover {
+  background: rgba(80, 246, 255, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(80, 246, 255, 0.3);
+}
+
+/* Tech tags */
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.tech-tags span {
+  background: rgba(80, 246, 255, 0.2);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+/* Contact section styles */
+.contact-methods {
+  margin: 30px 0;
+}
+
+.contact-method {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+.contact-method i {
+  margin-right: 15px;
+  font-size: 1.5rem;
+  color: #50f6ff;
+}
+
+.cv-button {
+  display: inline-block;
+  padding: 12px 30px;
+  background: linear-gradient(45deg, #50f6ff, #9333ea);
+  border-radius: 30px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.cv-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(147, 51, 234, 0.4);
+}
+
+/* Pochita animation positioning */
+#pochita .image-content {
+  justify-content: center;
+}
+
+/* Skills chart adjustments */
+.skills-chart {
+  margin-top: 30px;
+}
+
+/* Social links container */
+.social-links {
+  display: flex;
+  gap: 15px; /* Space between icons */
+  margin-top: 20px; /* Space above the links */
+  justify-content: center; /* Center the icons */
+  flex-wrap: wrap; /* Ensure icons wrap if there's not enough space */
+}
+
+/* Social icons */
+.social-icon img {
+  width: 50px; /* Icon size */
+  height: 50px; /* Icon size */
+  image-rendering: pixelated; /* Pixelated effect */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.social-icon img:hover {
+  transform: scale(1.2); /* Slight zoom effect on hover */
+}
+
+/* Language icons container */
+.language-icons {
+  display: flex;
+  gap: 20px; /* Space between icons */
+  justify-content: center; /* Center the icons */
+  margin-bottom: 20px; /* Space below the icons */
+}
+
+/* Individual language icon */
+.language-icon {
+  position: relative; /* For tooltip positioning */
+  width: 60px; /* Icon size */
+  height: 60px; /* Icon size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.language-icon img {
+  width: 100%; /* Fit the container */
+  height: 100%; /* Fit the container */
+  image-rendering: pixelated; /* Pixelated effect */
+}
+
+.language-icon:hover {
+  transform: scale(1.2); /* Slight zoom effect on hover */
+}
+
+/* Tooltip for language name */
+.language-icon::after {
+  content: attr(data-name); /* Display the name from the data-name attribute */
+  position: absolute;
+  bottom: -30px; /* Position below the icon */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8); /* Dark background */
+  color: #fff; /* White text */
+  padding: 5px 10px; /* Padding for the tooltip */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 0.9rem; /* Font size */
+  opacity: 0; /* Initially hidden */
+  pointer-events: none; /* Prevent interaction */
+  transition: opacity 0.3s ease; /* Smooth fade-in effect */
+}
+
+.language-icon:hover::after {
+  opacity: 1; /* Show the tooltip on hover */
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
   .content-card {
-    display: flex;
-    width: 90vw;
-    height: 80vh;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    flex-direction: column;
+    text-align: center;
   }
-  
+
   .text-content {
-    flex: 1;
-    padding-right: 40px;
-    color: white;
-  }
-  
-  .text-content h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(80, 246, 255, 0.7);
-  }
-  
-  .text-content p {
-    font-size: 1.1rem;
-    line-height: 1.6;
+    padding-right: 0;
     margin-bottom: 30px;
   }
-  
-  .image-content {
-    flex: 1;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .image-content img {
-    max-width: 100%;
-    max-height: 70vh;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  }
-  
-  /* Navigation Dots */
-  #navigation-dots {
-    position: fixed;
-    right: 30px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .dot {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .dot.active {
-    background: rgba(80, 246, 255, 0.8);
-    transform: scale(1.3);
-    box-shadow: 0 0 10px rgba(80, 246, 255, 0.7);
-  }
-  
-  /* Navigation Progress */
-  #navigation-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.1);
-    z-index: 100;
-  }
-  
-  #progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #50f6ff, #9333ea);
-    transition: width 0.3s ease;
-  }
-  
-  /* Project links */
-  .project-link {
-    display: inline-block;
-    padding: 10px 20px;
-    background: rgba(80, 246, 255, 0.2);
-    border-radius: 30px;
-    color: white;
-    text-decoration: none;
-    margin-bottom: 20px;
-    transition: all 0.3s ease;
-  }
-  
-  .project-link:hover {
-    background: rgba(80, 246, 255, 0.4);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(80, 246, 255, 0.3);
-  }
-  
-  /* Tech tags */
+
   .tech-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 20px;
+    justify-content: center;
   }
-  
-  .tech-tags span {
-    background: rgba(80, 246, 255, 0.2);
-    padding: 5px 15px;
-    border-radius: 20px;
+
+  #navigation-dots {
+    right: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-card {
+    padding: 25px;
+  }
+
+  .text-content h1 {
+    font-size: 2rem;
+  }
+
+  #navigation-dots {
+    display: none;
+  }
+
+  .contact-method {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-card {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .text-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .text-content p {
+    font-size: 1rem;
+  }
+
+  .project-link {
     font-size: 0.9rem;
   }
-  
-  /* Contact section styles */
-  .contact-methods {
-    margin: 30px 0;
-  }
-  
-  .contact-method {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-  }
-  
-  .contact-method i {
-    margin-right: 15px;
-    font-size: 1.5rem;
-    color: #50f6ff;
-  }
-  
-  .cv-button {
-    display: inline-block;
-    padding: 12px 30px;
-    background: linear-gradient(45deg, #50f6ff, #9333ea);
-    border-radius: 30px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
-  }
-  
-  .cv-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 20px rgba(147, 51, 234, 0.4);
-  }
-  
-  /* Pochita animation positioning */
-  #pochita .image-content {
-    justify-content:center;
-  }
-  
-  /* Skills chart adjustments */
-  .skills-chart {
-    margin-top: 30px;
-  }
-  
-  /* Responsive design */
-  @media (max-width: 992px) {
-    .content-card {
-      flex-direction: column;
-      text-align: center;
-    }
-    
-    .text-content {
-      padding-right: 0;
-      margin-bottom: 30px;
-    }
-    
-    .tech-tags {
-      justify-content: center;
-    }
-    
-    #navigation-dots {
-      right: 15px;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .content-card {
-      padding: 25px;
-    }
-    
-    .text-content h1 {
-      font-size: 2rem;
-    }
-    
-    #navigation-dots {
-      display: none;
-    }
-    
-    .contact-method {
-      font-size: 1rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .content-card {
-      width: 95%;
-      padding: 20px;
-    }
-    
-    .text-content h1 {
-      font-size: 1.8rem;
-    }
-    
-    .text-content p {
-      font-size: 1rem;
-    }
-    
-    .project-link {
-      font-size: 0.9rem;
-    }
-  }
+}
+
+/* Ensure headings and paragraphs use the font */
+h1, h2, h3, h4, h5, h6, p, a, span {
+  font-family: 'Pixelify Sans', sans-serif;
+  text-shadow: 0px 0px 4px black, 0px 0px 2px black, 0px 0px 3px black; /* Black border effect */
+}
+
+/* Additional styles for headings */
+h1 {
+  font-weight: 700; /* Bold for emphasis */
+}
+
+p, a, span {
+  font-weight: 400; /* Regular weight for readability */
+}
