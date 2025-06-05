@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
       colour1: [0.0, 0.6, 0.8, 1.0],
       colour2: [0.2, 0.8, 0.4, 1.0],
       colour3: [0.8, 0.4, 0.2, 1.0],
-      spinSpeed: 52.0,
+      spinSpeed: 1.0,
       lighting: 9.0
     },
     // Pochita section

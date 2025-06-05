@@ -180,4 +180,45 @@ function compileShader(type, source) {
   return shader;
 }
 
+function showFullView(imageUrl) {
+  // Create overlay
+  const overlay = document.createElement('div');
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0';
+  overlay.style.left = '0';
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+  overlay.style.zIndex = '1000';
+  overlay.style.display = 'flex';
+  overlay.style.justifyContent = 'center';
+  overlay.style.alignItems = 'center';
+
+  // Create image element
+  const fullImage = document.createElement('img');
+  fullImage.src = imageUrl;
+  fullImage.style.maxWidth = '90%';
+  fullImage.style.maxHeight = '90%';
+  fullImage.style.borderRadius = '10px';
+  fullImage.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5)';
+
+  // Append image to overlay
+  overlay.appendChild(fullImage);
+
+  // Add click event to close overlay
+  overlay.addEventListener('click', () => {
+    document.body.removeChild(overlay);
+  });
+
+  // Append overlay to body
+  document.body.appendChild(overlay);
+}
+
+// Add event listeners to all images
+document.querySelectorAll('.image-content img').forEach(img => {
+  img.addEventListener('click', () => {
+    showFullView(img.src);
+  });
+});
+
 init();

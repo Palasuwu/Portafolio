@@ -1,25 +1,25 @@
 /* Container for the chart */
 #language-chart {
     width: 100%;
-    max-width: 600px; /* Increase max width */
+    max-width: 600px; /* Default max width */
     background-color: #1e293b; /* Dark background */
     border-radius: 15px; /* Slightly larger border radius */
-    padding: 30px; /* Increase padding */
+    padding: 30px; /* Default padding */
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Stronger shadow */
     color: white;
     font-family: Arial, sans-serif;
     position: fixed;
     overflow: hidden;
-    transform: translateX(-40px); /* Move the component 20px to the left */
-    transform : translateY(-20px); /* Adjust vertical position */
-    border : 2px solid #38bdf8; /* Light blue border */
+    transform: translateX(-40px); /* Default horizontal position */
+    transform: translateY(-20px); /* Default vertical position */
+    border: 2px solid #38bdf8; /* Light blue border */
 }
 
 /* Title */
 #language-chart-title {
-    font-size: 2rem; /* Increase font size */
+    font-size: 2rem; /* Default font size */
     font-weight: bold;
-    margin-bottom: 30px; /* Add more spacing below the title */
+    margin-bottom: 30px; /* Default spacing below the title */
     text-align: center;
     color: #38bdf8; /* Light blue */
 }
@@ -27,7 +27,7 @@
 /* Single horizontal bar */
 #language-bar {
     width: 0; /* Start empty */
-    height: 30px; /* Increase height */
+    height: 30px; /* Default height */
     border-radius: 15px; /* Larger border radius */
     background: linear-gradient(to right, 
         #d97706 43%, /* Java */
@@ -54,55 +54,119 @@
 .language-guide {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 30px; /* Add more spacing above the guide */
-    gap: 15px; /* Increase spacing between guide items */
+    margin-top: 30px; /* Default spacing above the guide */
+    gap: 15px; /* Default spacing between guide items */
 }
 
 /* Guide item */
 .language-guide-item {
     display: flex;
     align-items: center;
-    gap: 10px; /* Increase spacing between color box and text */
-    font-size: 1.2rem; /* Increase font size */
+    gap: 10px; /* Default spacing between color box and text */
+    font-size: 1.2rem; /* Default font size */
 }
 
 /* Guide color box */
 .language-color-box {
-    width: 20px; /* Increase size */
-    height: 20px; /* Increase size */
+    width: 20px; /* Default size */
+    height: 20px; /* Default size */
     border-radius: 5px; /* Slightly larger border radius */
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     #language-chart {
         max-width: 90%; /* Reduce max width */
-        padding: 20px; /* Reduce padding */
+        padding: 25px; /* Reduce padding */
         transform: translateX(-20px); /* Adjust horizontal position */
+        transform: translateY(-10px); /* Adjust vertical position */
+    }
+
+    #language-chart-title {
+        font-size: 1.8rem; /* Reduce font size */
+        margin-bottom: 25px; /* Reduce spacing below the title */
+    }
+
+    #language-bar {
+        height: 25px; /* Reduce bar height */
+        border-radius: 12px; /* Adjust border radius */
+    }
+
+    .language-guide {
+        gap: 12px; /* Reduce spacing between guide items */
+    }
+
+    .language-guide-item {
+        font-size: 1.1rem; /* Reduce font size */
+    }
+
+    .language-color-box {
+        width: 18px; /* Reduce size */
+        height: 18px; /* Reduce size */
+    }
+}
+
+@media (max-width: 768px) {
+    #language-chart {
+        max-width: 85%; /* Further reduce max width */
+        padding: 20px; /* Reduce padding */
+        transform: translateX(-10px); /* Adjust horizontal position */
         transform: translateY(0); /* Center vertically */
     }
 
     #language-chart-title {
-        font-size: 1.5rem; /* Reduce font size */
+        font-size: 1.5rem; /* Further reduce font size */
         margin-bottom: 20px; /* Reduce spacing below the title */
     }
 
     #language-bar {
-        height: 20px; /* Reduce bar height */
+        height: 20px; /* Further reduce bar height */
         border-radius: 10px; /* Adjust border radius */
     }
 
     .language-guide {
-        gap: 10px; /* Reduce spacing between guide items */
+        gap: 10px; /* Further reduce spacing between guide items */
     }
 
     .language-guide-item {
-        font-size: 1rem; /* Reduce font size */
+        font-size: 1rem; /* Further reduce font size */
     }
 
     .language-color-box {
-        width: 15px; /* Reduce size */
-        height: 15px; /* Reduce size */
+        width: 15px; /* Further reduce size */
+        height: 15px; /* Further reduce size */
+    }
+}
+
+@media (max-width: 480px) {
+    #language-chart {
+        max-width: 95%; /* Max width for small screens */
+        padding: 15px; /* Reduce padding */
+        transform: translateX(0); /* Center horizontally */
+        transform: translateY(0); /* Center vertically */
+    }
+
+    #language-chart-title {
+        font-size: 1.3rem; /* Reduce font size */
+        margin-bottom: 15px; /* Reduce spacing below the title */
+    }
+
+    #language-bar {
+        height: 15px; /* Reduce bar height */
+        border-radius: 8px; /* Adjust border radius */
+    }
+
+    .language-guide {
+        gap: 8px; /* Reduce spacing between guide items */
+    }
+
+    .language-guide-item {
+        font-size: 0.9rem; /* Reduce font size */
+    }
+
+    .language-color-box {
+        width: 12px; /* Reduce size */
+        height: 12px; /* Reduce size */
     }
 }
 

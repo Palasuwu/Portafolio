@@ -28,7 +28,7 @@ uniform float LIGHTING;
 #define PIXEL_FILTER 3500.0
 #define SPIN_EASE 0.35
 #define IS_ROTATE true
-#define PARTICLE_COUNT 80
+#define PARTICLE_COUNT 120
 #define PARTICLE_SIZE 0.0001
 #define PARTICLE_COLOR vec4(1.0, 1.0, 1.0, 1.0)
 
