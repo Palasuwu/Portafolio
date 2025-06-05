@@ -12,15 +12,14 @@
   width: 90%; /* Make the image responsive to container width */
   height: auto; /* Maintain aspect ratio */
   max-height: 70vh; /* Limit height to viewport */
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: none; /* Remove shadow/border */
   object-fit: contain; /* Ensure images fit within their container */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  transition: transform 0.3s ease; /* Smooth hover effect */
 }
 
 .image-content img:hover {
   transform: scale(1.05); /* Slight zoom effect on hover */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Enhanced shadow on hover */
 }
 
 /* Responsive design */
@@ -101,6 +100,7 @@ canvas {
   display: flex;
   width: 90vw;
   height: 80vh;
+  object-fit: content ;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
@@ -131,6 +131,7 @@ canvas {
 .image-content {
   flex: 1;
   border-radius: 10px;
+  object-fit: content;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -140,7 +141,7 @@ canvas {
   max-width: 100%;
   max-height: 70vh;
   border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  object-fit: content;
 }
 
 /* Navigation Dots */

@@ -1,25 +1,24 @@
 /* Container for the chart */
 #language-chart {
-    width: 100%;
-    max-width: 600px; /* Default max width */
+    width: 100%; /* Full width of the parent container */
+    max-width: 100%; /* Responsive to the card */
     background-color: #1e293b; /* Dark background */
-    border-radius: 15px; /* Slightly larger border radius */
-    padding: 30px; /* Default padding */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+    border-radius: 12px; /* Slightly smaller border radius */
+    padding: 15px; /* Reduce padding */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3); /* Softer shadow */
     color: white;
     font-family: 'Pixelify Sans', sans-serif; /* Use the same font */
-    position: fixed;
+    position: relative; /* Relative positioning for alignment */
     overflow: hidden;
-    transform: translateX(-40px); /* Default horizontal position */
-    transform: translateY(-20px); /* Default vertical position */
+    margin: 0 auto; /* Center within the parent container */
     border: 2px solid #38bdf8; /* Light blue border */
 }
 
 /* Title */
 #language-chart-title {
-    font-size: 2rem; /* Default font size */
+    font-size: 1.6rem; /* Slightly smaller font size */
     font-weight: bold;
-    margin-bottom: 30px; /* Default spacing below the title */
+    margin-bottom: 15px; /* Reduce spacing below the title */
     text-align: center;
     color: #38bdf8; /* Light blue */
 }
@@ -27,8 +26,8 @@
 /* Single horizontal bar */
 #language-bar {
     width: 0; /* Start empty */
-    height: 30px; /* Default height */
-    border-radius: 15px; /* Larger border radius */
+    height: 20px; /* Slightly smaller height */
+    border-radius: 10px; /* Adjust border radius */
     background: linear-gradient(
         to right,
         #d97706, /* Java */
@@ -56,120 +55,112 @@
 .language-guide {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 30px; /* Default spacing above the guide */
-    gap: 15px; /* Default spacing between guide items */
+    margin-top: 15px; /* Reduce spacing above the guide */
+    gap: 8px; /* Reduce spacing between guide items */
+    justify-content: center; /* Center items within the container */
 }
 
 /* Guide item */
 .language-guide-item {
     display: flex;
     align-items: center;
-    gap: 10px; /* Default spacing between color box and text */
-    font-size: 1.2rem; /* Default font size */
+    gap: 6px; /* Reduce spacing between color box and text */
+    font-size: 0.9rem; /* Slightly smaller font size */
     font-family: 'Pixelify Sans', sans-serif; /* Use the same font */
 }
 
 /* Guide color box */
 .language-color-box {
-    width: 20px; /* Default size */
-    height: 20px; /* Default size */
-    border-radius: 5px; /* Slightly larger border radius */
+    width: 12px; /* Slightly smaller size */
+    height: 12px; /* Slightly smaller size */
+    border-radius: 4px; /* Adjust border radius */
 }
 
 /* Responsive adjustments */
 @media (max-width: 992px) {
     #language-chart {
-        max-width: 90%; /* Reduce max width */
-        padding: 25px; /* Reduce padding */
-        transform: translateX(-20px); /* Adjust horizontal position */
-        transform: translateY(-10px); /* Adjust vertical position */
+        padding: 12px; /* Reduce padding */
     }
 
     #language-chart-title {
-        font-size: 1.8rem; /* Reduce font size */
-        margin-bottom: 25px; /* Reduce spacing below the title */
+        font-size: 1.4rem; /* Reduce font size */
+        margin-bottom: 12px; /* Reduce spacing below the title */
     }
 
     #language-bar {
-        height: 25px; /* Reduce bar height */
-        border-radius: 12px; /* Adjust border radius */
+        height: 18px; /* Reduce bar height */
+        border-radius: 8px; /* Adjust border radius */
     }
 
     .language-guide {
-        gap: 12px; /* Reduce spacing between guide items */
+        gap: 6px; /* Reduce spacing between guide items */
     }
 
     .language-guide-item {
-        font-size: 1.1rem; /* Reduce font size */
+        font-size: 0.8rem; /* Reduce font size */
     }
 
     .language-color-box {
-        width: 18px; /* Reduce size */
-        height: 18px; /* Reduce size */
+        width: 10px; /* Reduce size */
+        height: 10px; /* Reduce size */
     }
 }
 
 @media (max-width: 768px) {
     #language-chart {
-        max-width: 85%; /* Further reduce max width */
-        padding: 20px; /* Reduce padding */
-        transform: translateX(-10px); /* Adjust horizontal position */
-        transform: translateY(0); /* Center vertically */
+        padding: 10px; /* Reduce padding */
     }
 
     #language-chart-title {
-        font-size: 1.5rem; /* Further reduce font size */
-        margin-bottom: 20px; /* Reduce spacing below the title */
+        font-size: 1.2rem; /* Further reduce font size */
+        margin-bottom: 10px; /* Reduce spacing below the title */
     }
 
     #language-bar {
-        height: 20px; /* Further reduce bar height */
-        border-radius: 10px; /* Adjust border radius */
+        height: 15px; /* Further reduce bar height */
+        border-radius: 6px; /* Adjust border radius */
     }
 
     .language-guide {
-        gap: 10px; /* Further reduce spacing between guide items */
+        gap: 5px; /* Further reduce spacing between guide items */
     }
 
     .language-guide-item {
-        font-size: 1rem; /* Further reduce font size */
+        font-size: 0.7rem; /* Further reduce font size */
     }
 
     .language-color-box {
-        width: 15px; /* Further reduce size */
-        height: 15px; /* Further reduce size */
+        width: 8px; /* Further reduce size */
+        height: 8px; /* Further reduce size */
     }
 }
 
 @media (max-width: 480px) {
     #language-chart {
-        max-width: 95%; /* Max width for small screens */
-        padding: 15px; /* Reduce padding */
-        transform: translateX(0); /* Center horizontally */
-        transform: translateY(0); /* Center vertically */
+        padding: 8px; /* Reduce padding */
     }
 
     #language-chart-title {
-        font-size: 1.3rem; /* Reduce font size */
-        margin-bottom: 15px; /* Reduce spacing below the title */
+        font-size: 1rem; /* Reduce font size */
+        margin-bottom: 8px; /* Reduce spacing below the title */
     }
 
     #language-bar {
-        height: 15px; /* Reduce bar height */
-        border-radius: 8px; /* Adjust border radius */
+        height: 12px; /* Reduce bar height */
+        border-radius: 5px; /* Adjust border radius */
     }
 
     .language-guide {
-        gap: 8px; /* Reduce spacing between guide items */
+        gap: 4px; /* Reduce spacing between guide items */
     }
 
     .language-guide-item {
-        font-size: 0.9rem; /* Reduce font size */
+        font-size: 0.6rem; /* Reduce font size */
     }
 
     .language-color-box {
-        width: 12px; /* Reduce size */
-        height: 12px; /* Reduce size */
+        width: 6px; /* Reduce size */
+        height: 6px; /* Reduce size */
     }
 }
 
