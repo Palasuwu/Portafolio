@@ -62,17 +62,38 @@ async function init() {
   const lightingLoc = gl.getUniformLocation(program, 'LIGHTING');
 
   // Initial values
-  let hoverRadius = 0.15;
+  let hoverRadius = 0.0001;
   let colour1 = [0.0, 0.6, 0.8, 1.0];
   let colour2 = [0.2, 0.8, 0.4, 1.0];
   let colour3 = [0.8, 0.4, 0.2, 1.0];
-  let spinSpeed = 52.0;
+  let spinSpeed = 1.0;
   let lighting = 9.0;
 
-  // Listen for shader updates from carousel.js
-  window.addEventListener('shader-update', (e) => {
-    const params = e.detail;
-    startTransition(params);
+  // Shader parameters for each card
+  const shaderParams = [
+    { colour1: [0.0, 0.6, 0.8, 1.0], colour2: [0.2, 0.8, 0.4, 1.0], colour3: [0.8, 0.4, 0.2, 1.0], spinSpeed: 1.0, lighting: 9.0 },
+    { colour1: [0.4, 0.6, 0.8, 1.0], colour2: [0.8, 0.8, 0.2, 1.0], colour3: [0.2, 0.4, 0.6, 1.0], spinSpeed: 1.0, lighting: 0.8 },
+    { colour1: [0.8, 0.2, 0.4, 1.0], colour2: [0.4, 0.8, 0.6, 1.0], colour3: [0.6, 0.2, 0.8, 1.0], spinSpeed: 2.0, lighting: 1.0 },
+    { colour1: [0.0, 0.4, 0.6, 1.0], colour2: [0.6, 0.8, 0.2, 1.0], colour3: [0.8, 0.6, 0.4, 1.0], spinSpeed: 3.0, lighting: 0.5 },
+    { colour1: [0.6, 0.8, 0.2, 1.0], colour2: [0.2, 0.6, 0.8, 1.0], colour3: [0.4, 0.2, 0.6, 1.0], spinSpeed: 4.0, lighting: 1.0 },
+    { colour1: [0.6, 0.8, 0.2, 1.0], colour2: [0.2, 0.6, 0.8, 1.0], colour3: [0.4, 0.2, 0.6, 1.0], spinSpeed: 5.0, lighting: 1.0 },
+  ];
+
+  // IntersectionObserver to detect visible cards
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const index = parseInt(entry.target.dataset.index, 10);
+        startTransition(shaderParams[index]);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  // Observe all cards
+  const cards = document.querySelectorAll('.section');
+  cards.forEach((card, index) => {
+    card.dataset.index = index; // Assign index to each card
+    observer.observe(card);
   });
 
   function easeInOut(t) {
@@ -94,6 +115,7 @@ async function init() {
   let endValues = {};
 
   function startTransition(params) {
+    console.log('Starting shader transition with params:', params); // Debugging
     transitioning = true;
     transitionStartTime = performance.now();
 

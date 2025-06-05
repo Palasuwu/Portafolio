@@ -79,23 +79,24 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateActiveSection() {
     const scrollPosition = window.scrollY;
     const windowHeight = window.innerHeight;
-    
+
     // Update progress bar
     const totalHeight = document.documentElement.scrollHeight - windowHeight;
     const progress = (scrollPosition / totalHeight) * 100;
     progressBar.style.width = `${progress}%`;
-    
+
     // Find active section
     sections.forEach((section, index) => {
       const sectionTop = section.offsetTop;
       const sectionHeight = section.offsetHeight;
-      
+
       if (scrollPosition >= sectionTop - windowHeight * 0.3 && 
           scrollPosition < sectionTop + sectionHeight - windowHeight * 0.3) {
+        console.log(`Active section index: ${index}`); // Debugging
         // Update active dot
         dots.forEach(dot => dot.classList.remove('active'));
         dots[index].classList.add('active');
-        s
+
         // Update shader
         updateShader(shaderParams[index]);
       }
@@ -107,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Shader update function
   function updateShader(params) {
-    // This will be implemented in main.js
+    console.log('Dispatching shader-update event:', params); // Debugging
     window.dispatchEvent(new CustomEvent('shader-update', {
       detail: params
     }));

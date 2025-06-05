@@ -48,8 +48,8 @@ html, body {
   
   .content-card {
     display: flex;
-    max-width: 1200px;
-    width: 90%;
+    width: 90vw;
+    height: 80vh;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
