@@ -1,166 +1,61 @@
-/* Container for the chart */
-#language-chart {
-    width: 100%; /* Full width of the parent container */
-    max-width: 100%; /* Responsive to the card */
-    background-color: #1e293b; /* Dark background */
-    border-radius: 12px; /* Slightly smaller border radius */
-    padding: 15px; /* Reduce padding */
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3); /* Softer shadow */
-    color: white;
-    font-family: 'Pixelify Sans', sans-serif; /* Use the same font */
-    position: relative; /* Relative positioning for alignment */
-    overflow: hidden;
-    margin: 0 auto; /* Center within the parent container */
-    border: 2px solid #38bdf8; /* Light blue border */
-}
-
-/* Title */
-#language-chart-title {
-    font-size: 1.6rem; /* Slightly smaller font size */
-    font-weight: bold;
-    margin-bottom: 15px; /* Reduce spacing below the title */
-    text-align: center;
-    color: #38bdf8; /* Light blue */
-}
-
-/* Single horizontal bar */
-#language-bar {
-    width: 0; /* Start empty */
-    height: 20px; /* Slightly smaller height */
-    border-radius: 10px; /* Adjust border radius */
-    background: linear-gradient(
-        to right,
-        #d97706, /* Java */
-        #facc15, /* JavaScript */
-        #a855f7, /* CSS */
-        #3b82f6, /* Python */
-        #ef4444, /* HTML */
-        #9333ea /* Kotlin */
-    ); /* Smooth gradient */
-    animation: fillBar 2s ease-in-out forwards; /* Smooth fill effect */
-    image-rendering: pixelated; /* Apply pixelated effect */
-}
-
-/* Animation for filling the bar */
-@keyframes fillBar {
-    from {
-        width: 0; /* Start empty */
-    }
-    to {
-        width: 100%; /* Fill the entire width */
-    }
-}
-
-/* Language guide */
-.language-guide {
+.skills-chart {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    margin-top: 15px; /* Reduce spacing above the guide */
-    gap: 8px; /* Reduce spacing between guide items */
-    justify-content: center; /* Center items within the container */
-}
-
-/* Guide item */
-.language-guide-item {
-    display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 6px; /* Reduce spacing between color box and text */
-    font-size: 0.9rem; /* Slightly smaller font size */
-    font-family: 'Pixelify Sans', sans-serif; /* Use the same font */
 }
 
-/* Guide color box */
-.language-color-box {
-    width: 12px; /* Slightly smaller size */
-    height: 12px; /* Slightly smaller size */
-    border-radius: 4px; /* Adjust border radius */
+.skills-list {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-/* Responsive adjustments */
-@media (max-width: 992px) {
-    #language-chart {
-        padding: 12px; /* Reduce padding */
-    }
-
-    #language-chart-title {
-        font-size: 1.4rem; /* Reduce font size */
-        margin-bottom: 12px; /* Reduce spacing below the title */
-    }
-
-    #language-bar {
-        height: 18px; /* Reduce bar height */
-        border-radius: 8px; /* Adjust border radius */
-    }
-
-    .language-guide {
-        gap: 6px; /* Reduce spacing between guide items */
-    }
-
-    .language-guide-item {
-        font-size: 0.8rem; /* Reduce font size */
-    }
-
-    .language-color-box {
-        width: 10px; /* Reduce size */
-        height: 10px; /* Reduce size */
-    }
+.skill-item {
+    display: flex;
+    flex-direction: column;
 }
 
-@media (max-width: 768px) {
-    #language-chart {
-        padding: 10px; /* Reduce padding */
-    }
-
-    #language-chart-title {
-        font-size: 1.2rem; /* Further reduce font size */
-        margin-bottom: 10px; /* Reduce spacing below the title */
-    }
-
-    #language-bar {
-        height: 15px; /* Further reduce bar height */
-        border-radius: 6px; /* Adjust border radius */
-    }
-
-    .language-guide {
-        gap: 5px; /* Further reduce spacing between guide items */
-    }
-
-    .language-guide-item {
-        font-size: 0.7rem; /* Further reduce font size */
-    }
-
-    .language-color-box {
-        width: 8px; /* Further reduce size */
-        height: 8px; /* Further reduce size */
-    }
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #cbd5e1;
 }
 
-@media (max-width: 480px) {
-    #language-chart {
-        padding: 8px; /* Reduce padding */
-    }
-
-    #language-chart-title {
-        font-size: 1rem; /* Reduce font size */
-        margin-bottom: 8px; /* Reduce spacing below the title */
-    }
-
-    #language-bar {
-        height: 12px; /* Reduce bar height */
-        border-radius: 5px; /* Adjust border radius */
-    }
-
-    .language-guide {
-        gap: 4px; /* Reduce spacing between guide items */
-    }
-
-    .language-guide-item {
-        font-size: 0.6rem; /* Reduce font size */
-    }
-
-    .language-color-box {
-        width: 6px; /* Reduce size */
-        height: 6px; /* Reduce size */
-    }
+.skill-name {
+    font-weight: 500;
+    color: #f1f5f9;
 }
 
+.skill-bar {
+    width: 100%;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.skill-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Animation Trigger */
+.section.is-visible .skill-bar-fill {
+    transform: scaleX(1);
+}
+
+/* Staggered animation delays */
+.section.is-visible .skill-item:nth-child(1) .skill-bar-fill { transition-delay: 0.3s; }
+.section.is-visible .skill-item:nth-child(2) .skill-bar-fill { transition-delay: 0.4s; }
+.section.is-visible .skill-item:nth-child(3) .skill-bar-fill { transition-delay: 0.5s; }
+.section.is-visible .skill-item:nth-child(4) .skill-bar-fill { transition-delay: 0.6s; }
+.section.is-visible .skill-item:nth-child(5) .skill-bar-fill { transition-delay: 0.7s; }
+.section.is-visible .skill-item:nth-child(6) .skill-bar-fill { transition-delay: 0.8s; }

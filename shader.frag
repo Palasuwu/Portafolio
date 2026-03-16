@@ -23,13 +23,13 @@ uniform float LIGHTING;
 // === ⚙️ Constantes generales ===
 #define SPIN_ROTATION 0.60
 #define OFFSET vec2(0.0)
-#define CONTRAST 3.5
+#define CONTRAST 2.0
 #define SPIN_AMOUNT 0.2
-#define PIXEL_FILTER 3500.0
+#define PIXEL_FILTER 5000.0
 #define SPIN_EASE 0.35
 #define IS_ROTATE true
-#define PARTICLE_COUNT 120
-#define PARTICLE_SIZE 0.0001
+#define PARTICLE_COUNT 80
+#define PARTICLE_SIZE 0.00008
 #define PARTICLE_COLOR vec4(1.0, 1.0, 1.0, 1.0)
 
 // === Función para números aleatorios ===
@@ -97,8 +97,8 @@ void main() {
         vec2 pos = vec2(rand(vec2(float(i), 0.0)), rand(vec2(0.0, float(i))));
         pos = mod(pos + vec2(iTime * 0.05 * rand(vec2(float(i) * 2.0, 0.0))), 1.0);
         float lifeFactor = mod(iTime, 5.0) / 5.0;
-        if (length(v_texCoord - pos) < PARTICLE_SIZE * lifeFactor) {
-            background += PARTICLE_COLOR * (0.5 + 0.5 * sin(iTime * 2.0));
+        if (length(v_texCoord - pos) < PARTICLE_SIZE * (lifeFactor + 0.1)) {
+            background += PARTICLE_COLOR * (0.5 + 0.5 * sin(iTime * 0.5 + float(i) * 6.2831));
         }
     }
 

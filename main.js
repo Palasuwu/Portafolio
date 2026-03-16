@@ -62,21 +62,27 @@ async function init() {
   const lightingLoc = gl.getUniformLocation(program, 'LIGHTING');
 
   // Initial values
-  let hoverRadius = 0.0001;
-  let colour1 = [0.0, 0.6, 0.8, 1.0];
-  let colour2 = [0.2, 0.8, 0.4, 1.0];
-  let colour3 = [0.8, 0.4, 0.2, 1.0];
-  let spinSpeed = 1.0;
-  let lighting = 9.0;
+  let hoverRadius = 0.0001; // Keep hover small initially
+  let colour1 = [0.02, 0.1, 0.2, 1.0];
+  let colour2 = [0.08, 0.25, 0.4, 1.0];
+  let colour3 = [0.1, 0.4, 0.5, 1.0];
+  let spinSpeed = 0.8;
+  let lighting = 1.5;
 
   // Shader parameters for each card
   const shaderParams = [
-    { colour1: [0.0, 0.6, 0.8, 1.0], colour2: [0.2, 0.8, 0.4, 1.0], colour3: [0.8, 0.4, 0.2, 1.0], spinSpeed: 1.0, lighting: 9.0 },
-    { colour1: [0.4, 0.6, 0.8, 1.0], colour2: [0.8, 0.8, 0.2, 1.0], colour3: [0.2, 0.4, 0.6, 1.0], spinSpeed: 1.0, lighting: 0.8 },
-    { colour1: [0.8, 0.2, 0.4, 1.0], colour2: [0.4, 0.8, 0.6, 1.0], colour3: [0.6, 0.2, 0.8, 1.0], spinSpeed: 2.0, lighting: 1.0 },
-    { colour1: [0.0, 0.4, 0.6, 1.0], colour2: [0.6, 0.8, 0.2, 1.0], colour3: [0.8, 0.6, 0.4, 1.0], spinSpeed: 3.0, lighting: 0.5 },
-    { colour1: [0.6, 0.8, 0.2, 1.0], colour2: [0.2, 0.6, 0.8, 1.0], colour3: [0.4, 0.2, 0.6, 1.0], spinSpeed: 4.0, lighting: 1.0 },
-    { colour1: [0.6, 0.8, 0.2, 1.0], colour2: [0.2, 0.6, 0.8, 1.0], colour3: [0.4, 0.2, 0.6, 1.0], spinSpeed: 5.0, lighting: 1.0 },
+    // About: Deep Ocean
+    { colour1: [0.02, 0.1, 0.2, 1.0], colour2: [0.08, 0.25, 0.4, 1.0], colour3: [0.1, 0.4, 0.5, 1.0], spinSpeed: 0.8, lighting: 1.5 },
+    // Pochita: Warm Ember
+    { colour1: [0.8, 0.2, 0.1, 1.0], colour2: [0.3, 0.1, 0.1, 1.0], colour3: [1.0, 0.5, 0.2, 1.0], spinSpeed: 1.2, lighting: 2.0 },
+    // API: Glacial
+    { colour1: [0.1, 0.2, 0.4, 1.0], colour2: [0.3, 0.4, 0.6, 1.0], colour3: [0.6, 0.7, 0.9, 1.0], spinSpeed: 2.0, lighting: 1.0 },
+    // Music: Nebula
+    { colour1: [0.3, 0.1, 0.4, 1.0], colour2: [0.8, 0.2, 0.5, 1.0], colour3: [0.1, 0.1, 0.2, 1.0], spinSpeed: 3.0, lighting: 1.2 },
+    // Skills: Forest
+    { colour1: [0.1, 0.3, 0.2, 1.0], colour2: [0.3, 0.6, 0.4, 1.0], colour3: [0.8, 0.7, 0.5, 1.0], spinSpeed: 1.5, lighting: 1.8 },
+    // Contact: Twilight
+    { colour1: [0.9, 0.6, 0.3, 1.0], colour2: [0.1, 0.1, 0.15, 1.0], colour3: [0.5, 0.3, 0.2, 1.0], spinSpeed: 5.0, lighting: 2.5 },
   ];
 
   // IntersectionObserver to detect visible cards
@@ -85,6 +91,9 @@ async function init() {
       if (entry.isIntersecting) {
         const index = parseInt(entry.target.dataset.index, 10);
         startTransition(shaderParams[index]);
+        entry.target.classList.add('is-visible');
+      } else {
+        entry.target.classList.remove('is-visible');
       }
     });
   }, { threshold: 0.5 });

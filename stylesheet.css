@@ -1,51 +1,3 @@
-/* Image content */
-.image-content {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden; /* Prevent images from overflowing */
-  margin-top: 30px; /* Add spacing between social links and image */
-}
-
-.image-content img {
-  width: 90%; /* Make the image responsive to container width */
-  height: auto; /* Maintain aspect ratio */
-  max-height: 70vh; /* Limit height to viewport */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: none; /* Remove shadow/border */
-  object-fit: contain; /* Ensure images fit within their container */
-  transition: transform 0.3s ease; /* Smooth hover effect */
-}
-
-.image-content img:hover {
-  transform: scale(1.05); /* Slight zoom effect on hover */
-}
-
-/* Responsive design */
-@media (max-width: 992px) {
-  .image-content img {
-    width: 100%; /* Adjust width for medium screens */
-    max-height: 60vh; /* Reduce max height for medium screens */
-  }
-}
-
-@media (max-width: 768px) {
-  .image-content img {
-    width: 100%; /* Ensure the image spans the card width */
-    max-height: 50vh; /* Further reduce max height for smaller screens */
-    object-fit: contain; /* Adjust fit to prevent cropping */
-  }
-}
-
-@media (max-width: 480px) {
-  .image-content img {
-    width: 100%; /* Ensure the image spans the card width */
-    max-height: 40vh; /* Reduce max height for very small screens */
-    object-fit: contain; /* Prevent cropping */
-  }
-}
-
 /* Updated stylesheet.css */
 html, body {
   margin: 0;
@@ -53,7 +5,7 @@ html, body {
   overflow: hidden;
   background: black;
   height: 100%;
-  font-family: 'Pixelify Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   color: #ffffff; /* Default text color */
   background-color: #1e293b; /* Background color for contrast */
 }
@@ -99,39 +51,57 @@ canvas {
 .content-card {
   display: flex;
   width: 90vw;
-  height: 80vh;
-  object-fit: content ;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  max-width: 1200px;
+  max-height: 85vh; /* Keep the card safely inside the viewport */
+  background: rgba(23, 31, 47, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 32px;
+  padding: clamp(30px, 5vw, 60px); /* Fluid padding */
+  overflow-y: auto; /* Allow scrolling inside the card if content is too tall */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0px rgba(255, 255, 255, 0.05);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.content-card::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in Chrome/Safari/Edge */
+}
+
+.content-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0px rgba(255, 255, 255, 0.05);
 }
 
 .text-content {
   flex: 1;
   padding-right: 40px;
-  color: white;
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .text-content h1 {
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 4vw, 3.5rem); /* Fluid font size */
   margin-bottom: 20px;
-  text-shadow: 1px 3px 10px "black";
+  letter-spacing: -0.03em;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
 }
 
 .text-content p {
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem); /* Fluid font size */
   line-height: 1.6;
   margin-bottom: 30px;
+  color: #cbd5e1;
+  font-weight: 300;
 }
 
 .image-content {
   flex: 1;
   border-radius: 10px;
-  object-fit: content;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -141,73 +111,62 @@ canvas {
   max-width: 100%;
   max-height: 70vh;
   border-radius: 10px;
-  object-fit: content;
+  transition: transform 0.4s ease;
+  object-fit: contain;
+}
+
+.image-content img:hover {
+  transform: scale(1.03);
 }
 
 /* Navigation Dots */
 #navigation-dots {
   position: fixed;
   right: 30px;
-  display: none;
   top: 50%;
   transform: translateY(-50%);
   z-index: 100;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
+/* Redesigned Navigation Dots */
 .dot {
-  width: 15px;
-  display: none;
-  height: 15px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
+  width: 3px;
+  height: 25px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.2);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .dot.active {
-  display: none;
-  background: rgba(80, 246, 255, 0.8);
-  transform: scale(1.3);
-  box-shadow: 0 0 10px rgba(80, 246, 255, 0.7);
-}
-
-/* Navigation Progress */
-#navigation-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.1);
-  z-index: 100;
-}
-
-#progress-bar {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #50f6ff, #9333ea);
-  transition: width 0.3s ease;
+  background: #c084fc;
+  width: 5px;
+  transform: scaleY(1.5);
 }
 
 /* Project links */
 .project-link {
   display: inline-block;
-  padding: 10px 20px;
-  background: rgba(80, 246, 255, 0.2);
+  padding: clamp(10px, 2vw, 12px) clamp(20px, 3vw, 24px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 30px;
   color: white;
   text-decoration: none;
   margin-bottom: 20px;
   transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
 }
 
 .project-link:hover {
-  background: rgba(80, 246, 255, 0.4);
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(80, 246, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 
 /* Tech tags */
@@ -219,10 +178,12 @@ canvas {
 }
 
 .tech-tags span {
-  background: rgba(80, 246, 255, 0.2);
-  padding: 5px 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 6px clamp(12px, 2vw, 16px);
   border-radius: 20px;
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  color: #e2e8f0;
 }
 
 /* Contact section styles */
@@ -234,7 +195,7 @@ canvas {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2vw, 1.1rem);
 }
 
 .contact-method i {
@@ -245,18 +206,28 @@ canvas {
 
 .cv-button {
   display: inline-block;
-  padding: 12px 30px;
-  background: linear-gradient(45deg, #50f6ff, #9333ea);
+  padding: clamp(12px, 2vw, 14px) clamp(24px, 4vw, 32px);
+  background: #ffffff;
   border-radius: 30px;
-  color: white;
+  color: #0f172a;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
   transition: all 0.3s ease;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+}
+
+.cv-button i {
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.cv-button:hover i {
+  transform: translateY(2px);
 }
 
 .cv-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 20px rgba(147, 51, 234, 0.4);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.25);
 }
 
 /* Pochita animation positioning */
@@ -266,7 +237,7 @@ canvas {
 
 /* Skills chart adjustments */
 .skills-chart {
-  margin-top: 30px;
+  margin-top: 0;
 }
 
 /* Social links container */
@@ -280,9 +251,8 @@ canvas {
 
 /* Social icons */
 .social-icon img {
-  width: 50px; /* Icon size */
-  height: 50px; /* Icon size */
-  image-rendering: pixelated; /* Pixelated effect */
+  width: clamp(40px, 5vw, 50px);
+  height: clamp(40px, 5vw, 50px);
   cursor: pointer; /* Pointer cursor on hover */
   transition: transform 0.3s ease; /* Smooth hover effect */
 }
@@ -302,8 +272,8 @@ canvas {
 /* Individual language icon */
 .language-icon {
   position: relative; /* For tooltip positioning */
-  width: 60px; /* Icon size */
-  height: 60px; /* Icon size */
+  width: clamp(45px, 6vw, 60px);
+  height: clamp(45px, 6vw, 60px);
   cursor: pointer; /* Pointer cursor on hover */
   transition: transform 0.3s ease; /* Smooth hover effect */
 }
@@ -311,7 +281,6 @@ canvas {
 .language-icon img {
   width: 100%; /* Fit the container */
   height: 100%; /* Fit the container */
-  image-rendering: pixelated; /* Pixelated effect */
 }
 
 .language-icon:hover {
@@ -345,70 +314,223 @@ canvas {
   .content-card {
     flex-direction: column;
     text-align: center;
+    align-items: center;
   }
 
   .text-content {
     padding-right: 0;
     margin-bottom: 30px;
+    align-items: center; /* Center items under column flex */
   }
 
   .tech-tags {
     justify-content: center;
   }
 
+  .image-content {
+    width: 100%;
+  }
+
+  .image-content img {
+    max-height: 35vh; /* Restrict image height when stacked vertically */
+  }
+
   #navigation-dots {
     right: 15px;
+    gap: 15px; /* Pull dots slightly tighter on tablet/mobile */
   }
 }
 
-@media (max-width: 768px) {
-  .content-card {
-    padding: 25px;
+/* Alternating layout for desktop */
+@media (min-width: 993px) {
+  .section:nth-child(even) .content-card {
+    flex-direction: row-reverse;
   }
 
-  .text-content h1 {
-    font-size: 2rem;
-  }
-
-  #navigation-dots {
-    display: none;
-  }
-
-  .contact-method {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .content-card {
-    width: 95%;
-    padding: 20px;
-  }
-
-  .text-content h1 {
-    font-size: 1.8rem;
-  }
-
-  .text-content p {
-    font-size: 1rem;
-  }
-
-  .project-link {
-    font-size: 0.9rem;
+  .section:nth-child(even) .content-card .text-content {
+    padding-right: 0;
+    padding-left: 40px;
   }
 }
 
 /* Ensure headings and paragraphs use the font */
 h1, h2, h3, h4, h5, h6, p, a, span {
-  font-family: 'Pixelify Sans', sans-serif;
-  text-shadow: 0px 0px 4px black, 0px 0px 2px black, 0px 0px 3px black; /* Black border effect */
+  font-family: 'Inter', sans-serif;
 }
 
 /* Additional styles for headings */
 h1 {
-  font-weight: 700; /* Bold for emphasis */
+  font-weight: 500; /* Professional emphasis */
+  font-family: 'DM Sans', sans-serif;
 }
 
 p, a, span {
-  font-weight: 400; /* Regular weight for readability */
+  font-weight: 300; 
+}
+
+/* Entrance Animations */
+.text-content, .image-content {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.215, 0.610, 0.355, 1), transform 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+.section.is-visible .text-content {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.1s;
+}
+
+.section.is-visible .image-content {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.25s;
+}
+
+/* --- Pochita Styles (from lab4.css) --- */
+
+/* Cuerpo */
+.pochita {
+    width: 100px;
+    height: 100px;
+    background-color: #f25a29;
+    border-radius: 50%;
+    border: 1px solid black; /* Borde negro */
+    position: relative;
+    box-shadow: 0 0 40px rgba(242, 90, 41, 0.8);
+    animation: breathe 2s ease-in-out infinite;
+}
+
+/* Manija estilo */
+.pochita::before {
+    content: '';
+    width: 60px;
+    height: 30px;
+    position: absolute;
+    top: -22px;
+    left: 12px;
+    background: transparent;
+    border: 8px solid black;
+    border-bottom: none;
+    border-radius: 40px 40px 0 0;
+}
+
+/* Motosierra  */
+.pochita::after {
+    content: '';
+    width: 14px;
+    height: 50px;
+    background: repeating-linear-gradient(
+        to bottom,
+        #bbb,
+        #bbb 5px,
+        #ddd 5px,
+        #ddd 10px
+    );
+    position: absolute;
+    top: 25px;
+    left: 43px;
+    box-shadow: 0 0 3px #999;
+    border: 2px solid #999;
+    border-radius: 3px;
+}
+
+/* Ojos */
+.pochita .eye {
+    position: absolute;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Pupilas */
+.pochita .eye::before {
+    content: '';
+    width: 23px;
+    height: 26px;
+    background: black;
+    border-radius: 50%;
+
+}
+
+/* Posicionamiento especifico de cada ojo */
+.pochita .eye.left {
+    left: 10px;
+}
+
+.pochita .eye.right {
+    right: 6px;
+}
+
+/* Boca Left */ 
+.pochita .mouth {
+    width: 15px;
+    height: 23px;
+    background-color: #f25a29;
+    display: block;
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
+    border: 2px solid #561804;
+    transform: rotate(230deg);
+    left: 32px;
+    top: 55px;
+    position: absolute
+}
+/* Boca right */ 
+.pochita .mouth2 {
+    width: 15px;
+    height: 23px;
+    background-color: #f25a29;
+    display: block;
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
+    border: 2px solid #561804;
+    transform: rotate(-230deg);
+    left: 57px;
+    top: 55px;
+    position: absolute
+}
+
+/* boca */
+.pochita .mouth::before {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 20px;
+    transform: rotate(220deg);
+    border-bottom-right-radius: 500%;
+    border-top-right-radius: 500%;
+    background: rgb(241, 144, 99);
+    border: 1px solid black; /* Borde negro */
+    right: 5px;
+    bottom: -8px;
+}
+
+/* Patitas (dos abajo) */
+.pochita .foot {
+    position: absolute;
+    width: 18px;
+    height: 10px;
+    background: #f25a29;
+    border: 1px solid black;
+    border-radius: 50%;
+    bottom: -2px;
+}
+
+.pochita .foot.left {
+    left: 15px;
+}
+
+.pochita .foot.right {
+    right: 15px;
+}
+
+@keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
